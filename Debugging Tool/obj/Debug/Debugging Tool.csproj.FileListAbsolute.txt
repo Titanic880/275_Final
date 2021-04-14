@@ -1,0 +1,7 @@
+C:\Users\Mitch\Desktop\275 - DB\Standards-Final\Debugging Tool\bin\Debug\Debugging Tool.exe.config
+C:\Users\Mitch\Desktop\275 - DB\Standards-Final\Debugging Tool\bin\Debug\Debugging Tool.exe
+C:\Users\Mitch\Desktop\275 - DB\Standards-Final\Debugging Tool\bin\Debug\Debugging Tool.pdb
+C:\Users\Mitch\Desktop\275 - DB\Standards-Final\Debugging Tool\obj\Debug\Debugging Tool.csprojAssemblyReference.cache
+C:\Users\Mitch\Desktop\275 - DB\Standards-Final\Debugging Tool\obj\Debug\Debugging Tool.csproj.CoreCompileInputs.cache
+C:\Users\Mitch\Desktop\275 - DB\Standards-Final\Debugging Tool\obj\Debug\Debugging Tool.exe
+C:\Users\Mitch\Desktop\275 - DB\Standards-Final\Debugging Tool\obj\Debug\Debugging Tool.pdb
