@@ -8,7 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Standards_Final;
-namespace Client.Forms
+
+namespace Server.Forms
 {
     public partial class Create_Quiz : Form
     {

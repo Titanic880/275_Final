@@ -181,28 +181,15 @@
     <Compile Include="Forms\Main_Server.Designer.cs">
       <DependentUpon>Main_Server.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Quizer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Quizer.Designer.cs">
-      <DependentUpon>Quizer.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Framework-Ent\Server_DbContext.cs" />
+    <Compile Include="Framework-Ent\Server_DbLogic.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Quizlet\Question.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Quizlet\Question.Designer.cs">
-      <DependentUpon>Question.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Quizlet\Quiz4Question.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Quizlet\Quiz4Question.Designer.cs">
-      <DependentUpon>Quiz4Question.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Forms\Create_Question.resx">
       <DependentUpon>Create_Question.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Create_Quiz.resx">
+      <DependentUpon>Create_Quiz.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Main_Server.resx">
       <DependentUpon>Main_Server.cs</DependentUpon>
@@ -216,9 +203,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Quizlet\Quiz4Question.resx">
-      <DependentUpon>Quiz4Question.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

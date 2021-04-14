@@ -1,13 +1,7 @@
-﻿using Standards_Final.Quizlet;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Standards_Final.Quizlet;
 using System.Windows.Forms;
+using System;
 
 namespace Server.Forms
 {
@@ -55,7 +49,13 @@ namespace Server.Forms
                     if (int.TryParse(TbQ.Text, out int res))
                         Timer = res;
 
-                    Q = new Question(Main_Server.Host_Client, TbQ.Text, Answers.ToArray(), C_Answers.ToArray(), DateTime.Now, Timer);
+                    Q = new Question(Framework_Ent.Server_DbLogic.Host_Client,
+                                     TbQ.Text,
+                                     Answers.ToArray(),
+                                     C_Answers.ToArray(),
+                                     DateTime.Now, 
+                                     Timer);
+
                     this.Close();
                 }
                 else

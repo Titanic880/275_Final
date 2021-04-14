@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.ComponentModel;
-using System.Data;
+using System.Windows.Forms;
+using System.Net.Sockets;
 using System.Drawing;
+using System.Data;
+using System.Text;
 using System.Linq;
 using System.Net;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using System;
 
 namespace Server.Forms
 {
     public partial class Main_Server : Form
     {
-        public static Standards_Final.Users.User Host_Client { get; set; }
         public static List<Client_Object> Clients = new List<Client_Object>();
         private readonly Client_Object manager;
         private TcpListener tcpListener;

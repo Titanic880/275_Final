@@ -1,5 +1,5 @@
 ﻿
-namespace Client.Forms
+namespace Server.Forms
 {
     partial class Create_Quiz
     {

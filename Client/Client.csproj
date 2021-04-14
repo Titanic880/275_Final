@@ -181,18 +181,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Active_User.cs" />
-    <Compile Include="Forms\Create_Question.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Create_Question.Designer.cs">
-      <DependentUpon>Create_Question.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Create_Quiz.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Create_Quiz.Designer.cs">
-      <DependentUpon>Create_Quiz.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Home.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -205,12 +193,6 @@
     <Compile Include="Forms\LaunchForm.Designer.cs">
       <DependentUpon>LaunchForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Quizlet\Question.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Quizlet\Question.Designer.cs">
-      <DependentUpon>Question.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Quizlet\Quiz4Question.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -220,12 +202,6 @@
     <Compile Include="Host_Connection.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\Create_Question.resx">
-      <DependentUpon>Create_Question.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Create_Quiz.resx">
-      <DependentUpon>Create_Quiz.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
     </EmbeddedResource>
