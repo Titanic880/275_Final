@@ -10,6 +10,7 @@ namespace Standards_Final.Sessions
     [Serializable()]
     public class Login_Result
     {
+        public bool New_User { get; set; } = false;
         public User User { get; private set; }
         public User_Temp Temp { get; set; }
 

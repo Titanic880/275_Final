@@ -23,6 +23,9 @@ namespace Client
 
         public event ResultLogin Login_Res;
         public delegate void ResultLogin(Login_Result result);
+
+        public event RecievedQuiz GetQuiz;
+        public delegate void RecievedQuiz(Standards_Final.Quizlet.Quiz le_Quiz);
         #endregion Delegates
 
         //User Stack
@@ -62,6 +65,8 @@ namespace Client
 
                 if (o is Login_Result LR)
                     Login_Res(LR);
+                else if (o is Standards_Final.Quizlet.Quiz Q)
+                    GetQuiz(Q);
                 else
                     FromServer(o);
             }

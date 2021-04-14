@@ -106,10 +106,8 @@ namespace Server
                     wkr.ReportProgress(3, ResReq);
                 else if (o is Login_Request LReq)
                     wkr.ReportProgress(4, LReq);
-                else if (o is Login_Result LRes)
-                    wkr.ReportProgress(5, LRes);
                 else if (o is User_Temp UserT)
-                    wkr.ReportProgress(6, UserT);
+                    wkr.ReportProgress(5, UserT);
             }
         }
 
@@ -128,15 +126,15 @@ namespace Server
                     UserDef(this);
                     break;
                 case 3: //Register Request
-                    SendMessage(Server_DbLogic.Client_Login(Server_DbLogic.Client_Register((Register_Request)e.UserState)));
+                    SendMessage(Server_DbLogic.Client_Register((Register_Request)e.UserState));
                     break;
                 case 4: //Login Request
                     SendMessage(Server_DbLogic.Client_Login((Login_Request)e.UserState));
                     break;
-                case 5: //Login Result
-                    
+                case 5: //Temp User Connecting to session
+
                     break;
-                case 6: //Temp User Connecting to session
+                case 6: 
                     AnonSess((User_Temp)e.UserState);
                     break;
                 case 7:

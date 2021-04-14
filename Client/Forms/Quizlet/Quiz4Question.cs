@@ -18,6 +18,8 @@ namespace Client.Forms.Quizlet
         /// </summary>
         public bool Correct { get; private set; } = false;
         private readonly Standards_Final.Quizlet.Question q;
+
+        public Quiz4Question() { InitializeComponent(); }
         public Quiz4Question(Standards_Final.Quizlet.Question Q)
         {
             InitializeComponent();

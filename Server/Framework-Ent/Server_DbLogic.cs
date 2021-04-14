@@ -63,7 +63,7 @@ namespace Server.Framework_Ent
         #endregion
 
         #region Client
-        public static Login_Result Client_Login(Login_Request request)
+        public static Login_Result Client_Login(Login_Request request, bool newUser = false)
         {
             //Checks for null/Empty request
             if (request == null)
@@ -84,10 +84,11 @@ namespace Server.Framework_Ent
             {
                 ret = new Login_Result(null);
             }
+            ret.New_User = newUser;
             return ret;
         }
 
-        public static Login_Request Client_Register(Register_Request request)
+        public static Login_Result Client_Register(Register_Request request)
         {
             using (Server_DbContext db = new Server_DbContext())
             {
@@ -101,14 +102,12 @@ namespace Server.Framework_Ent
                     .Where(x => x.UserName == newUser.UserName
                     && x.Password == newUser.Password).FirstOrDefault();
                 if(Test != null)
-                {
-                    return new Login_Request(Test);
-                }
+                    return Client_Login(new Login_Request(Test));
+                
 
                 db.Db_Users.Add(newUser);
                 db.SaveChanges();
-
-                return new Login_Request(newUser);
+                return Client_Login(new Login_Request(newUser), true);
             }
         }
         #endregion Client

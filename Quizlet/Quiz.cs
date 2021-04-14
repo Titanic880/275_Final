@@ -12,5 +12,10 @@ namespace Standards_Final.Quizlet
     {
         [Key]
         public int Id { get; set; }
+        public Question[] Qs {get; set; }
+
+        public Quiz(Question[] questions)
+        => Qs = questions;
+        
     }
 }

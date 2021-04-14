@@ -96,7 +96,10 @@ namespace Client.Forms
             if (result.User != null)
             {
                 Active_User.Active_User_Object = result.User;
-                MessageBox.Show($"Hello {result.User.UserName}");
+                if (result.New_User)
+                    MessageBox.Show($"Hello and welcome to kahoot.Clone {result.User.UserName}");
+                else
+                    MessageBox.Show($"Hello {result.User.UserName}");
             }
             else if (result.Temp != null)
                 Active_User.Active_User_Object = result.Temp;
