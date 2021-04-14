@@ -8,6 +8,7 @@ using System.Text;
 using System.Linq;
 using System.IO;
 using System;
+using Standards_Final.Sessions;
 
 namespace Client
 {
@@ -20,6 +21,12 @@ namespace Client
         public event ConnEst Connected;
         public delegate void ConnEst();
 
+        //
+        public event RecievedFromServer FromServer;
+        public delegate void RecievedFromServer(object package);
+
+        public event ResultLogin Login_Res;
+        public delegate void ResultLogin(Login_Result result);
         #endregion Delegates
 
         //User Stack
@@ -36,9 +43,6 @@ namespace Client
             wkr.WorkerSupportsCancellation = true;
             wkr.DoWork += MainLoop;
         }
-
-
-
         private void MainLoop(object s, DoWorkEventArgs e)
         {
             tcpClient = new TcpClient();
@@ -57,8 +61,26 @@ namespace Client
                 if (nStream == null)
                     continue;
                 object o = Stream.Deserialize(nStream);
-
+                
+                if (o is Login_Result LR)
+                    Login_Res(LR);
+                
+                else
+                    FromServer(o);
             }
+        }
+
+        /// <summary>
+        /// Sends the object to the server
+        /// </summary>
+        /// <param name="package"></param>
+        public void Send_To_Server(object package)
+        {
+            if (package == null || writer == null)
+                return;
+
+            IFormatter stream = new BinaryFormatter();
+            stream.Serialize(writer.BaseStream, package);
         }
     }
 }

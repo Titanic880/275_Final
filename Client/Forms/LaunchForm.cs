@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,6 +17,8 @@ namespace Client.Forms
         public LaunchForm()
         {
             InitializeComponent();
+            TbCustomIP.Text = Dns.GetHostEntry(SystemInformation.ComputerName).AddressList
+               .Where(x => x.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork).First().ToString();
         }
 
         private void BtnHostCon_Click(object sender, EventArgs e)
@@ -31,7 +34,6 @@ namespace Client.Forms
         {
             Host_ = new Host_Connection(Ip);
             Host_.Connected += Host_Connected;
-
         }
 
         private void Host_Connected()

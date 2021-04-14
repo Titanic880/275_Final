@@ -12,20 +12,25 @@ namespace Client.Forms
 {
     public partial class Login : Form
     {
-        Host_Connection host_;
-        public Login(ref Host_Connection host)
+        public Login()
         {
             InitializeComponent();
-            host_ = host;
+            LaunchForm.Host_.Login_Res += Host__Login_Res;
+        }
+
+        private void Host__Login_Res(Standards_Final.Sessions.Login_Result result)
+        {
+            if (result.User != null)
+                Active_User.Active_User_Object = result.User;
         }
 
         private void BtnSubmit_Click(object sender, EventArgs e)
         {
             Standards_Final.Sessions.Login_Request request = new Standards_Final.Sessions.Login_Request();
             request.Username = MTbUsername.Text;
-            request.Password = 
+            request.Password = Standards_Final.Standards.Hasher(MTbPass.Text);
 
-            throw new NotImplementedException();
+            LaunchForm.Host_.Send_To_Server(request);
         }
     }
 }
