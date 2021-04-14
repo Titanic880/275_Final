@@ -61,10 +61,15 @@ namespace Server.Forms
 
         private void ClientDisconnected(Client_Object client)
         {
+            string msg = null;
+            if (client.User_Obj == null)
+                msg = "A client has disconnected";
+            else
+                msg = $"{client.User_Obj.UserName} has disconnected";
             if (Clients.Remove(client))
             {
-                lstError.Items.Add($"{client.User_Obj.UserName} has disconnected");
-                Client_Object.ClientCounter--;
+                    lstError.Items.Add(msg);
+               Client_Object.ClientCounter--;
             }
         }
 

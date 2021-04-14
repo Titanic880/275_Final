@@ -22,6 +22,7 @@ namespace Client.Forms
             InitializeComponent();
             TimeLeft.Interval = 100;
             TimeLeft.Tick += TimeLeft_Tick;
+            QuizQuestion.Enabled = false;
         }
 
         private void TimeLeft_Tick(object sender, EventArgs e)
@@ -69,6 +70,7 @@ namespace Client.Forms
             Le_Quiz = le_Quiz;
             //Sends the first question
             Reset_Next();
+            QuizQuestion.Enabled = true;
         }
     }
 }

@@ -14,7 +14,10 @@ namespace Client
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LaunchForm());
+            LaunchForm frm = new LaunchForm();
+            Application.Run(frm);
+            LaunchForm.Host_.Send_To_Server(new Standards_Final.Sessions.DisconnectUser());
+            frm.Dispose();
         }
     }
 }

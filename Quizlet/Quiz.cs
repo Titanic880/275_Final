@@ -14,6 +14,7 @@ namespace Standards_Final.Quizlet
         public int Id { get; set; }
         public Question[] Qs {get; set; }
 
+        public Quiz() { }
         public Quiz(Question[] questions)
         => Qs = questions;
         
