@@ -67,6 +67,13 @@ namespace Client.Forms
             Host_Connected();
         }
 
+        private void OpenHome()
+        {
+            this.Hide();
+            new Home().ShowDialog();
+            this.Show();
+        }
+
         #region Delegates
         private void Host_Connected()
         {
@@ -87,11 +94,20 @@ namespace Client.Forms
         private void Host__Login_Res(Standards_Final.Sessions.Login_Result result)
         {
             if (result.User != null)
+            {
                 Active_User.Active_User_Object = result.User;
+                MessageBox.Show($"Hello {result.User.UserName}");
+            }
             else if (result.Temp != null)
                 Active_User.Active_User_Object = result.Temp;
             else
+            {
                 MessageBox.Show("User not found!");
+                return;
+            }
+
+            //Invoke to let main thread deal with the forms
+            BeginInvoke(new MethodInvoker(OpenHome));
         }
         #endregion
     }

@@ -67,7 +67,9 @@ namespace Server.Framework_Ent
         {
             //Checks for null/Empty request
             if (request == null)
-                return new Login_Result(null); 
+                return new Login_Result(null);
+            if (request.ReqUser == null)
+                return new Login_Result(null);
 
             Login_Result ret = null;
 
@@ -100,7 +102,7 @@ namespace Server.Framework_Ent
                     && x.Password == newUser.Password).FirstOrDefault();
                 if(Test != null)
                 {
-                    return new Login_Request();
+                    return new Login_Request(Test);
                 }
 
                 db.Db_Users.Add(newUser);
