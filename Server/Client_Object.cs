@@ -5,6 +5,7 @@ using Standards_Final.Sessions;
 using System.Threading.Tasks;
 using Standards_Final.Users;
 using System.ComponentModel;
+using Server.Framework_Ent;
 using System.Net.Sockets;
 using System.Text;
 using System.Linq;
@@ -127,13 +128,13 @@ namespace Server
                     UserDef(this);
                     break;
                 case 3: //Register Request
-
+                    SendMessage(Server_DbLogic.Client_Login(Server_DbLogic.Client_Register((Register_Request)e.UserState)));
                     break;
                 case 4: //Login Request
-
+                    SendMessage(Server_DbLogic.Client_Login((Login_Request)e.UserState));
                     break;
                 case 5: //Login Result
-
+                    
                     break;
                 case 6: //Temp User Connecting to session
                     AnonSess((User_Temp)e.UserState);

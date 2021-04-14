@@ -9,10 +9,15 @@ namespace Standards_Final.Sessions
     [Serializable()]
     public class Login_Request
     {
-        public string Username { get; set; }
-        /// <summary>
-        /// Hashed
-        /// </summary>
-        public string Password { get; set; }
+        public Users.User ReqUser { get; set; }
+
+        public Login_Request()
+        {
+
+        }
+        public Login_Request(Users.User user)
+        {
+            ReqUser = user;
+        }
     }
 }

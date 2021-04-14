@@ -18,5 +18,14 @@ namespace Standards_Final.Users
         /// </summary>
         public string Password { get; set; }
 
+        public User()
+        {
+
+        }
+        public User(string Username, string Pass)
+        {
+            this.UserName = Username;
+            this.Password = Pass;
+        }
     }
 }

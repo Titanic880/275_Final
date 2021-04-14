@@ -25,8 +25,9 @@ namespace Client.Forms
         {
             Standards_Final.Sessions.Login_Request request = new Standards_Final.Sessions.Login_Request
             {
-                Username = MTbUsername.Text,
-                Password = Standards.Hasher(MTbPass.Text)
+                ReqUser = new Standards_Final.Users.User
+                (MTbUsername.Text, 
+                Standards.Hasher(MTbPass.Text))
             };
 
             Host_.Send_To_Server(request);
