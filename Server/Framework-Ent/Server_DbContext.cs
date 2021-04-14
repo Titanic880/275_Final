@@ -17,7 +17,7 @@ namespace Server.Framework_Ent
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            options.UseSqlServer("localhost;Database=275Final;User Id=sa;Password=SchoolCont");
+            options.UseSqlServer("server=localhost,1433;database=275Final;user id=SA;password=SchoolCont");
         }
     }
 }

@@ -8,7 +8,6 @@ namespace Standards_Final.Quizlet
 {
     public class Live_Question : Question
     {
-
         public Live_Question(Users.User Creator)
         :base(Creator)
         {

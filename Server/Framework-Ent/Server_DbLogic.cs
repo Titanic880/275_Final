@@ -27,7 +27,7 @@ namespace Server.Framework_Ent
             {
                 Host_Client = db.Db_Users
                     .Where(x => x.UserName == request.ReqUser.UserName
-                    && x.Password == request.ReqUser.Password).FirstOrDefault());
+                    && x.Password == request.ReqUser.Password).FirstOrDefault();
             }
 
             if (Host_Client != null)

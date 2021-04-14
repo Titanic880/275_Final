@@ -183,6 +183,11 @@
     </Compile>
     <Compile Include="Framework-Ent\Server_DbContext.cs" />
     <Compile Include="Framework-Ent\Server_DbLogic.cs" />
+    <Compile Include="Migrations\20210414183514_Init.cs" />
+    <Compile Include="Migrations\20210414183514_Init.designer.cs">
+      <DependentUpon>20210414183514_Init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Server_DbContextModelSnapshot.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\Create_Question.resx">
