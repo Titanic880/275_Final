@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Standards_Final.Quizlet
 {
+    [Serializable()]
     public class Quiz
     {
 

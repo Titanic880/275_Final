@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Standards_Final.Quizlet
 {
+    [Serializable()]
     public class Question
     {
         public int Id { get; set; }
@@ -37,13 +38,6 @@ namespace Standards_Final.Quizlet
             this.Correct_Answers = Correct_Answers;
             Created_Question = Created_Date;
             Question_Time = Timer;
-        }
-
-        
-
-        public static Question[] GetPublicQuestions()
-        {
-            throw new NotImplementedException();
         }
     }
 }

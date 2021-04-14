@@ -10,6 +10,7 @@ using System.Text;
 using System.Linq;
 using System.IO;
 using System;
+
 namespace Server
 {
     public class Client_Object
@@ -96,6 +97,7 @@ namespace Server
                     wkr.ReportProgress(1, DU);
                 else if (o is User U)
                     wkr.ReportProgress(2, U);
+                
             }
         }
 

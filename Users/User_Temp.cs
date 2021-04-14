@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Standards_Final.Users
 {
-    class User_Temp
+    [Serializable()]
+    public class User_Temp : User
     {
+
     }
 }

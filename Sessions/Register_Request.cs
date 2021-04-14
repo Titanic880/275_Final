@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Standards_Final.Sessions
 {
+    [Serializable()]
     //SEND A LOGIN RESULT BACK
     public class Register_Request
     {

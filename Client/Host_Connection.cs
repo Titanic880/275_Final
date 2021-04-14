@@ -17,11 +17,7 @@ namespace Client
         private readonly string IPAddress;
 
         #region Delegates
-        //Runs when connection is made
-        public event ConnEst Connected;
-        public delegate void ConnEst();
-
-        //
+        //Recieves data from the server
         public event RecievedFromServer FromServer;
         public delegate void RecievedFromServer(object package);
 

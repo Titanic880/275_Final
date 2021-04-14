@@ -39,6 +39,11 @@ namespace Client.Forms
             this.label1 = new System.Windows.Forms.Label();
             this.MTbPass = new System.Windows.Forms.MaskedTextBox();
             this.MTbUsername = new System.Windows.Forms.MaskedTextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.TbSession = new System.Windows.Forms.MaskedTextBox();
+            this.TbNick = new System.Windows.Forms.MaskedTextBox();
+            this.BtnAnon = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblCustIP
@@ -79,6 +84,7 @@ namespace Client.Forms
             // 
             // BtnLogin
             // 
+            this.BtnLogin.Enabled = false;
             this.BtnLogin.Location = new System.Drawing.Point(167, 132);
             this.BtnLogin.Name = "BtnLogin";
             this.BtnLogin.Size = new System.Drawing.Size(125, 35);
@@ -89,6 +95,7 @@ namespace Client.Forms
             // 
             // BtnRegister
             // 
+            this.BtnRegister.Enabled = false;
             this.BtnRegister.Location = new System.Drawing.Point(167, 173);
             this.BtnRegister.Name = "BtnRegister";
             this.BtnRegister.Size = new System.Drawing.Size(125, 35);
@@ -117,23 +124,77 @@ namespace Client.Forms
             // 
             // MTbPass
             // 
+            this.MTbPass.Enabled = false;
             this.MTbPass.Location = new System.Drawing.Point(167, 106);
             this.MTbPass.Name = "MTbPass";
+            this.MTbPass.PasswordChar = '*';
             this.MTbPass.Size = new System.Drawing.Size(125, 20);
             this.MTbPass.TabIndex = 12;
+            this.MTbPass.UseSystemPasswordChar = true;
             // 
             // MTbUsername
             // 
+            this.MTbUsername.Enabled = false;
             this.MTbUsername.Location = new System.Drawing.Point(167, 67);
             this.MTbUsername.Name = "MTbUsername";
             this.MTbUsername.Size = new System.Drawing.Size(125, 20);
             this.MTbUsername.TabIndex = 11;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(300, 51);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(57, 13);
+            this.label3.TabIndex = 20;
+            this.label3.Text = "NickName";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(300, 90);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(58, 13);
+            this.label4.TabIndex = 19;
+            this.label4.Text = "Session ID";
+            // 
+            // TbSession
+            // 
+            this.TbSession.Enabled = false;
+            this.TbSession.Location = new System.Drawing.Point(298, 106);
+            this.TbSession.Name = "TbSession";
+            this.TbSession.Size = new System.Drawing.Size(125, 20);
+            this.TbSession.TabIndex = 18;
+            // 
+            // TbNick
+            // 
+            this.TbNick.Enabled = false;
+            this.TbNick.Location = new System.Drawing.Point(298, 67);
+            this.TbNick.Name = "TbNick";
+            this.TbNick.Size = new System.Drawing.Size(125, 20);
+            this.TbNick.TabIndex = 17;
+            // 
+            // BtnAnon
+            // 
+            this.BtnAnon.Enabled = false;
+            this.BtnAnon.Location = new System.Drawing.Point(298, 132);
+            this.BtnAnon.Name = "BtnAnon";
+            this.BtnAnon.Size = new System.Drawing.Size(125, 35);
+            this.BtnAnon.TabIndex = 16;
+            this.BtnAnon.Text = "Connect Anon";
+            this.BtnAnon.UseVisualStyleBackColor = true;
+            this.BtnAnon.Click += new System.EventHandler(this.BtnAnon_Click);
+            // 
             // LaunchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(357, 283);
+            this.ClientSize = new System.Drawing.Size(479, 283);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.TbSession);
+            this.Controls.Add(this.TbNick);
+            this.Controls.Add(this.BtnAnon);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.MTbPass);
@@ -163,5 +224,10 @@ namespace Client.Forms
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.MaskedTextBox MTbPass;
         private System.Windows.Forms.MaskedTextBox MTbUsername;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.MaskedTextBox TbSession;
+        private System.Windows.Forms.MaskedTextBox TbNick;
+        private System.Windows.Forms.Button BtnAnon;
     }
 }
