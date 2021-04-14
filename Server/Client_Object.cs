@@ -37,6 +37,10 @@ namespace Server
         //Runs when the user class is assigned
         public event UserDefined UserDef;
         public delegate void UserDefined(Client_Object client);
+
+        //Connects Anon users to a given session
+        public event AnonSession AnonSess;
+        public delegate void AnonSession(User_Temp Anon);
         #endregion Delegates
 
         //Main worker
@@ -93,11 +97,18 @@ namespace Server
                 object o = formatter.Deserialize(C_reader.BaseStream);
                 if (o is null)
                     continue;
-                else if (o is DisconnectUser DU)
-                    wkr.ReportProgress(1, DU);
+                else if (o is DisconnectUser DisU)
+                    wkr.ReportProgress(1, DisU);
                 else if (o is User U)
                     wkr.ReportProgress(2, U);
-                
+                else if (o is Register_Request ResReq)
+                    wkr.ReportProgress(3, ResReq);
+                else if (o is Login_Request LReq)
+                    wkr.ReportProgress(4, LReq);
+                else if (o is Login_Result LRes)
+                    wkr.ReportProgress(5, LRes);
+                else if (o is User_Temp UserT)
+                    wkr.ReportProgress(6, UserT);
             }
         }
 
@@ -105,27 +116,27 @@ namespace Server
         {
             switch (e.ProgressPercentage)
             {
-                case 0:
+                case 0: //User connect
                     NewClientConnected(this);
                     break;
-                case 1:
+                case 1: //User Disconnect
                     ClientDisconnected(this);
                     break;
                 case 2:
                     this.User_Obj = (User)e.UserState;
                     UserDef(this);
                     break;
-                case 3:
+                case 3: //Register Request
 
                     break;
-                case 4:
+                case 4: //Login Request
 
                     break;
-                case 5:
+                case 5: //Login Result
 
                     break;
-                case 6:
-
+                case 6: //Temp User Connecting to session
+                    AnonSess((User_Temp)e.UserState);
                     break;
                 case 7:
 

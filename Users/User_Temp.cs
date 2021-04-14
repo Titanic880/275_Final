@@ -9,6 +9,6 @@ namespace Standards_Final.Users
     [Serializable()]
     public class User_Temp : User
     {
-
+        public Sessions.Session_Conn Session { get; set; }
     }
 }

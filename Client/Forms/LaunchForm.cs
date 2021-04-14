@@ -52,7 +52,8 @@ namespace Client.Forms
         {
             Standards_Final.Users.User_Temp tmp = new Standards_Final.Users.User_Temp
             {
-                UserName = TbNick.Text
+                UserName = TbNick.Text,
+                Session = new Standards_Final.Sessions.Session_Conn(TbSession.Text)
             };
 
             Host_.Send_To_Server(tmp);
