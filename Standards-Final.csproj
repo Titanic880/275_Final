@@ -46,6 +46,7 @@
     <Compile Include="Quizlet\Live_Question.cs" />
     <Compile Include="Quizlet\Question.cs" />
     <Compile Include="Quizlet\Quiz.cs" />
+    <Compile Include="Sessions\DisconnectUser.cs" />
     <Compile Include="Sessions\Login_Request.cs" />
     <Compile Include="Sessions\Login_Result.cs" />
     <Compile Include="Sessions\Register_Request.cs" />

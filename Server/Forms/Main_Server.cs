@@ -15,7 +15,7 @@ namespace Server.Forms
     public partial class Main_Server : Form
     {
         public static List<Client_Object> Clients = new List<Client_Object>();
-        private readonly Client_Object manager;
+        private Client_Object manager;
         private TcpListener tcpListener;
 
         public Main_Server()
@@ -35,15 +35,49 @@ namespace Server.Forms
             tcpListener.Start();
 
             lstError.Items.Add($"Server Started on {serverIP}:{Standards_Final.Standards.Port}");
+
+            NewClient();
         }
         private void NewClient()
         {
-           // Mngr_NewClientConnected;
-           // Mngr_ClientDisconnected;
-           // Mngr_ReceivedMessage;
-           // Mngr_ReceivedFile;
-           // Mngr_SetUserName;
-           // Mngr_RecievedCommand;
+            manager = new Client_Object(tcpListener);
+            manager.NewClientConnected += NewClientConnected;
+            manager.ClientDisconnected += ClientDisconnected;
+            manager.ReceivedMessage += ReceivedMessage;
+            manager.UserDef += UserDef;
+        }
+
+        private void UserDef(Client_Object client)
+        {
+            RelayMessage($"{client.User_Obj.UserName} has connected!");
+        }
+
+        private void NewClientConnected(Client_Object client)
+        {
+            Clients.Add(client);
+            lstError.Items.Add($"{Clients.Count-1} has connected");
+            NewClient();
+        }
+
+        private void ClientDisconnected(Client_Object client)
+        {
+            if (Clients.Remove(client))
+            {
+                lstError.Items.Add($"{client.User_Obj.UserName} has disconnected");
+                Client_Object.ClientCounter--;
+            }
+        }
+
+        private void ReceivedMessage(Client_Object client, object Item)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void RelayMessage(object message)
+        {
+            //Loops through each User
+            foreach (Client_Object c in Clients)
+                c.SendMessage(message);
         }
     }
 }

@@ -42,6 +42,8 @@ namespace Client
 
             wkr.WorkerSupportsCancellation = true;
             wkr.DoWork += MainLoop;
+
+            wkr.RunWorkerAsync();
         }
         private void MainLoop(object s, DoWorkEventArgs e)
         {

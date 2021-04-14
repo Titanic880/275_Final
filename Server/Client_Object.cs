@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Net.Sockets;
+﻿using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
+using System.Collections.Generic;
+using Standards_Final.Sessions;
 using System.Threading.Tasks;
-
+using Standards_Final.Users;
+using System.ComponentModel;
+using System.Net.Sockets;
+using System.Text;
+using System.Linq;
+using System.IO;
+using System;
 namespace Server
 {
     public class Client_Object
@@ -17,8 +18,7 @@ namespace Server
 
         //Client ID
         public static int ClientCounter;
-        public string Client_Name;
-        public int Client_ID;
+        public User User_Obj { get; private set; }
 
         #region Delegates 
         //Runs when a client first connects
@@ -32,6 +32,10 @@ namespace Server
         //Handles user messages
         public event ReceivedMessageEventHandler ReceivedMessage;
         public delegate void ReceivedMessageEventHandler(Client_Object client, object Item);
+
+        //Runs when the user class is assigned
+        public event UserDefined UserDef;
+        public delegate void UserDefined(Client_Object client);
         #endregion Delegates
 
         //Main worker
@@ -47,7 +51,7 @@ namespace Server
         public Client_Object(TcpListener listener)
         {
             Client_Listener = listener;
-            Client_ID++;
+            ClientCounter++;
 
             wkr.WorkerReportsProgress = true;
             wkr.DoWork += Incoming;
@@ -88,7 +92,10 @@ namespace Server
                 object o = formatter.Deserialize(C_reader.BaseStream);
                 if (o is null)
                     continue;
-
+                else if (o is DisconnectUser DU)
+                    wkr.ReportProgress(1, DU);
+                else if (o is User U)
+                    wkr.ReportProgress(2, U);
             }
         }
 
@@ -97,13 +104,14 @@ namespace Server
             switch (e.ProgressPercentage)
             {
                 case 0:
-
+                    NewClientConnected(this);
                     break;
                 case 1:
-
+                    ClientDisconnected(this);
                     break;
                 case 2:
-
+                    this.User_Obj = (User)e.UserState;
+                    UserDef(this);
                     break;
                 case 3:
 
@@ -122,5 +130,22 @@ namespace Server
                     break;
             }
         }
+
+        public void SendMessage(object Msg)
+        {
+            if (Msg == null)
+                return;
+
+            else if (C_writer == null)  //Checks for writer, if its null wait a second for initilization attempt
+            {
+                System.Threading.Thread.Sleep(1000);
+                if (C_writer == null)
+                    return;
+            }
+
+            IFormatter formatter = new BinaryFormatter();
+            formatter.Serialize(C_writer.BaseStream, Msg);
+        }
+
     }
 }

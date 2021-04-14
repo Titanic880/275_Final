@@ -64,6 +64,9 @@ namespace Client.Forms
         {
             BtnLogin.Enabled = true;
             BtnRegister.Enabled = true;
+
+            BtnConnectCustom.Enabled = false;
+            BtnHostCon.Enabled = false;
         }
 
         private void Host__Login_Res(Standards_Final.Sessions.Login_Result result)
