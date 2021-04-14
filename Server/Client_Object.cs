@@ -21,8 +21,17 @@ namespace Server
         public int Client_ID;
 
         #region Delegates 
+        //Runs when a client first connects
+        public event NewClientConnectedEventHandler NewClientConnected;
+        public delegate void NewClientConnectedEventHandler(Client_Object client);
 
+        //Runs when a client disconnects
+        public event ClientDisconnectedEventHandler ClientDisconnected;
+        public delegate void ClientDisconnectedEventHandler(Client_Object client);
 
+        //Handles user messages
+        public event ReceivedMessageEventHandler ReceivedMessage;
+        public delegate void ReceivedMessageEventHandler(Client_Object client, object Item);
         #endregion Delegates
 
         //Main worker

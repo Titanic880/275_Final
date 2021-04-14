@@ -14,8 +14,9 @@ namespace Server.Forms
 {
     public partial class Main_Server : Form
     {
+        public static Standards_Final.Users.User Host_Client { get; set; }
         public static List<Client_Object> Clients = new List<Client_Object>();
-        private Client_Object manager;
+        private readonly Client_Object manager;
         private TcpListener tcpListener;
 
         public Main_Server()

@@ -35,12 +35,16 @@ namespace Client.Forms
             this.BtnHostCon = new System.Windows.Forms.Button();
             this.BtnLogin = new System.Windows.Forms.Button();
             this.BtnRegister = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.MTbPass = new System.Windows.Forms.MaskedTextBox();
+            this.MTbUsername = new System.Windows.Forms.MaskedTextBox();
             this.SuspendLayout();
             // 
             // lblCustIP
             // 
             this.lblCustIP.AutoSize = true;
-            this.lblCustIP.Location = new System.Drawing.Point(41, 42);
+            this.lblCustIP.Location = new System.Drawing.Point(33, 90);
             this.lblCustIP.Name = "lblCustIP";
             this.lblCustIP.Size = new System.Drawing.Size(55, 13);
             this.lblCustIP.TabIndex = 8;
@@ -48,14 +52,14 @@ namespace Client.Forms
             // 
             // TbCustomIP
             // 
-            this.TbCustomIP.Location = new System.Drawing.Point(44, 58);
+            this.TbCustomIP.Location = new System.Drawing.Point(36, 106);
             this.TbCustomIP.Name = "TbCustomIP";
             this.TbCustomIP.Size = new System.Drawing.Size(125, 20);
             this.TbCustomIP.TabIndex = 7;
             // 
             // BtnConnectCustom
             // 
-            this.BtnConnectCustom.Location = new System.Drawing.Point(44, 84);
+            this.BtnConnectCustom.Location = new System.Drawing.Point(36, 132);
             this.BtnConnectCustom.Name = "BtnConnectCustom";
             this.BtnConnectCustom.Size = new System.Drawing.Size(125, 35);
             this.BtnConnectCustom.TabIndex = 6;
@@ -65,7 +69,7 @@ namespace Client.Forms
             // 
             // BtnHostCon
             // 
-            this.BtnHostCon.Location = new System.Drawing.Point(44, 125);
+            this.BtnHostCon.Location = new System.Drawing.Point(36, 173);
             this.BtnHostCon.Name = "BtnHostCon";
             this.BtnHostCon.Size = new System.Drawing.Size(125, 35);
             this.BtnHostCon.TabIndex = 5;
@@ -75,7 +79,7 @@ namespace Client.Forms
             // 
             // BtnLogin
             // 
-            this.BtnLogin.Location = new System.Drawing.Point(44, 182);
+            this.BtnLogin.Location = new System.Drawing.Point(167, 132);
             this.BtnLogin.Name = "BtnLogin";
             this.BtnLogin.Size = new System.Drawing.Size(125, 35);
             this.BtnLogin.TabIndex = 10;
@@ -85,7 +89,7 @@ namespace Client.Forms
             // 
             // BtnRegister
             // 
-            this.BtnRegister.Location = new System.Drawing.Point(44, 223);
+            this.BtnRegister.Location = new System.Drawing.Point(167, 173);
             this.BtnRegister.Name = "BtnRegister";
             this.BtnRegister.Size = new System.Drawing.Size(125, 35);
             this.BtnRegister.TabIndex = 9;
@@ -93,11 +97,47 @@ namespace Client.Forms
             this.BtnRegister.UseVisualStyleBackColor = true;
             this.BtnRegister.Click += new System.EventHandler(this.BtnRegister_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(169, 51);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(57, 13);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "UserName";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(169, 90);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 13);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Password";
+            // 
+            // MTbPass
+            // 
+            this.MTbPass.Location = new System.Drawing.Point(167, 106);
+            this.MTbPass.Name = "MTbPass";
+            this.MTbPass.Size = new System.Drawing.Size(125, 20);
+            this.MTbPass.TabIndex = 12;
+            // 
+            // MTbUsername
+            // 
+            this.MTbUsername.Location = new System.Drawing.Point(167, 67);
+            this.MTbUsername.Name = "MTbUsername";
+            this.MTbUsername.Size = new System.Drawing.Size(125, 20);
+            this.MTbUsername.TabIndex = 11;
+            // 
             // LaunchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(225, 283);
+            this.ClientSize = new System.Drawing.Size(357, 283);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.MTbPass);
+            this.Controls.Add(this.MTbUsername);
             this.Controls.Add(this.BtnLogin);
             this.Controls.Add(this.BtnRegister);
             this.Controls.Add(this.lblCustIP);
@@ -119,5 +159,9 @@ namespace Client.Forms
         private System.Windows.Forms.Button BtnHostCon;
         private System.Windows.Forms.Button BtnLogin;
         private System.Windows.Forms.Button BtnRegister;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.MaskedTextBox MTbPass;
+        private System.Windows.Forms.MaskedTextBox MTbUsername;
     }
 }

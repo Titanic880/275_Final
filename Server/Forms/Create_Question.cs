@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Standards_Final.Quizlet;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,17 +8,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Standards_Final.Quizlet;
 
-namespace Client.Forms
+namespace Server.Forms
 {
     public partial class Create_Question : Form
     {
+        public Question Q { get; private set; }
         public Create_Question()
         {
             InitializeComponent();
         }
-        public Question Q { get; private set; }
+
         private void BtnSubmit_Click(object sender, EventArgs e)
         {
             //Checks for the basics of a question
@@ -54,7 +55,7 @@ namespace Client.Forms
                     if (int.TryParse(TbQ.Text, out int res))
                         Timer = res;
 
-                    Q = new Question(Active_User.Active_User_Object, TbQ.Text, Answers.ToArray(), C_Answers.ToArray(), DateTime.Now, Timer);
+                    Q = new Question(Main_Server.Host_Client, TbQ.Text, Answers.ToArray(), C_Answers.ToArray(), DateTime.Now, Timer);
                     this.Close();
                 }
                 else

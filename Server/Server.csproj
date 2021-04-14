@@ -163,6 +163,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client_Object.cs" />
+    <Compile Include="Forms\Create_Question.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Create_Question.Designer.cs">
+      <DependentUpon>Create_Question.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Create_Quiz.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Create_Quiz.Designer.cs">
+      <DependentUpon>Create_Quiz.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Main_Server.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -177,6 +189,24 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Quizlet\Question.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Quizlet\Question.Designer.cs">
+      <DependentUpon>Question.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Quizlet\Quiz4Question.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Quizlet\Quiz4Question.Designer.cs">
+      <DependentUpon>Quiz4Question.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Forms\Create_Question.resx">
+      <DependentUpon>Create_Question.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Main_Server.resx">
+      <DependentUpon>Main_Server.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -186,6 +216,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Quizlet\Quiz4Question.resx">
+      <DependentUpon>Quiz4Question.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -199,6 +232,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Standards-Final.csproj">
+      <Project>{cebbf10c-f23e-458a-a0d4-44344f9980c6}</Project>
+      <Name>Standards-Final</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

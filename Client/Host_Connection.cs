@@ -14,7 +14,7 @@ namespace Client
 {
     public class Host_Connection
     {
-        private string IPAddress;
+        private readonly string IPAddress;
 
         #region Delegates
         //Runs when connection is made
@@ -61,10 +61,9 @@ namespace Client
                 if (nStream == null)
                     continue;
                 object o = Stream.Deserialize(nStream);
-                
+
                 if (o is Login_Result LR)
                     Login_Res(LR);
-                
                 else
                     FromServer(o);
             }
