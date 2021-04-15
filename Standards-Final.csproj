@@ -50,6 +50,8 @@
     <Compile Include="Sessions\DisconnectUser.cs" />
     <Compile Include="Sessions\Login_Request.cs" />
     <Compile Include="Sessions\Login_Result.cs" />
+    <Compile Include="Sessions\Message.cs" />
+    <Compile Include="Sessions\New_Session.cs" />
     <Compile Include="Sessions\Register_Request.cs" />
     <Compile Include="Sessions\Session_Conn.cs" />
     <Compile Include="Standards.cs" />

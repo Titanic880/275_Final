@@ -36,6 +36,11 @@ namespace Server.Forms
             this.LblUserMessages = new System.Windows.Forms.Label();
             this.lstUMessage = new System.Windows.Forms.ListBox();
             this.LblIP = new System.Windows.Forms.Label();
+            this.TbUserName = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.TbPass = new System.Windows.Forms.TextBox();
+            this.BtnLogin = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -99,11 +104,57 @@ namespace Server.Forms
             this.LblIP.TabIndex = 28;
             this.LblIP.Text = "IP Address";
             // 
+            // TbUserName
+            // 
+            this.TbUserName.Location = new System.Drawing.Point(300, 28);
+            this.TbUserName.Name = "TbUserName";
+            this.TbUserName.Size = new System.Drawing.Size(100, 20);
+            this.TbUserName.TabIndex = 31;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(297, 12);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(55, 13);
+            this.label2.TabIndex = 32;
+            this.label2.Text = "Username";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(403, 12);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 13);
+            this.label3.TabIndex = 34;
+            this.label3.Text = "Password";
+            // 
+            // TbPass
+            // 
+            this.TbPass.Location = new System.Drawing.Point(406, 28);
+            this.TbPass.Name = "TbPass";
+            this.TbPass.Size = new System.Drawing.Size(100, 20);
+            this.TbPass.TabIndex = 33;
+            // 
+            // BtnLogin
+            // 
+            this.BtnLogin.Location = new System.Drawing.Point(512, 25);
+            this.BtnLogin.Name = "BtnLogin";
+            this.BtnLogin.Size = new System.Drawing.Size(75, 23);
+            this.BtnLogin.TabIndex = 35;
+            this.BtnLogin.Text = "Login";
+            this.BtnLogin.UseVisualStyleBackColor = true;
+            // 
             // Main_Server
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(612, 282);
+            this.Controls.Add(this.BtnLogin);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.TbPass);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.TbUserName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lstError);
             this.Controls.Add(this.CbIP);
@@ -126,5 +177,10 @@ namespace Server.Forms
         private System.Windows.Forms.Label LblUserMessages;
         private System.Windows.Forms.ListBox lstUMessage;
         private System.Windows.Forms.Label LblIP;
+        private System.Windows.Forms.TextBox TbUserName;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox TbPass;
+        private System.Windows.Forms.Button BtnLogin;
     }
 }

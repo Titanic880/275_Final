@@ -17,6 +17,7 @@ namespace Standards_Final.Users
         /// Hashed
         /// </summary>
         public string Password { get; set; }
+        public Sessions.Session_Conn Current_Session { get; set; }
 
         public User()
         {

@@ -1,0 +1,52 @@
+LIMITATIONS:
+	ONLY 1 Quiz can happen at once
+	
+
+
+
+Forms:
+	.Launch (Login/Register)
+	.Login (Forwards to Home Form)
+	.Register
+	.Home Form (Links into Create and join)
+	.Create Question
+	.Create Quiz 
+	.
+
+
+
+Objects:
+	.User
+	.User_Temp
+		.Works same as User, but not stored
+	.Question
+		.Holds 2-4 Answers
+		.One has to be delegated to be right
+		.holds Question
+		
+	.Quiz
+	.Session_ID
+	
+	
+DEALING WITH SESSIONS:::
+
+	.Session_ID
+	.forwarding all Session_ID's to a specific form?
+	.forwarding all Session_ID's to a specific class?
+	
+	.TEMP user needs testing and work done(Session needs to be finished first)
+	
+	
+Current Quiz system::
+	.Sends entire quiz
+	.Goes through each question one by one
+	.no server interaction
+	
+	
+Quiz Scoping::
+	.Record when the question is started
+	.Record when the question is answered
+	.Record when the question is over
+	.let the host decide when it moves onto the next question (keep quiz on host?)
+	.Share the score of others via the host
+	.the Server is not seen by players (only for host/admin of the program)

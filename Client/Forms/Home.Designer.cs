@@ -29,7 +29,7 @@ namespace Client.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.TbSession = new System.Windows.Forms.TextBox();
             this.BtnSessionConnect = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.QuizQuestion = new Client.Forms.Quizlet.Quiz4Question();
@@ -37,14 +37,15 @@ namespace Client.Forms
             this.prgTimeLeft = new System.Windows.Forms.ProgressBar();
             this.lblTimeLeft = new System.Windows.Forms.Label();
             this.lblCorrect = new System.Windows.Forms.Label();
+            this.BtnHost = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // textBox1
+            // TbSession
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 28);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 0;
+            this.TbSession.Location = new System.Drawing.Point(12, 28);
+            this.TbSession.Name = "TbSession";
+            this.TbSession.Size = new System.Drawing.Size(100, 20);
+            this.TbSession.TabIndex = 0;
             // 
             // BtnSessionConnect
             // 
@@ -106,11 +107,22 @@ namespace Client.Forms
             this.lblCorrect.TabIndex = 7;
             this.lblCorrect.Text = "Correct Answers: ";
             // 
+            // BtnHost
+            // 
+            this.BtnHost.Location = new System.Drawing.Point(12, 102);
+            this.BtnHost.Name = "BtnHost";
+            this.BtnHost.Size = new System.Drawing.Size(100, 37);
+            this.BtnHost.TabIndex = 8;
+            this.BtnHost.Text = "Start a session";
+            this.BtnHost.UseVisualStyleBackColor = true;
+            this.BtnHost.Click += new System.EventHandler(this.BtnHost_Click);
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.BtnHost);
             this.Controls.Add(this.lblCorrect);
             this.Controls.Add(this.lblTimeLeft);
             this.Controls.Add(this.prgTimeLeft);
@@ -118,7 +130,7 @@ namespace Client.Forms
             this.Controls.Add(this.QuizQuestion);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BtnSessionConnect);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.TbSession);
             this.Name = "Home";
             this.Text = "Home";
             this.ResumeLayout(false);
@@ -128,7 +140,7 @@ namespace Client.Forms
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox TbSession;
         private System.Windows.Forms.Button BtnSessionConnect;
         private System.Windows.Forms.Label label1;
         private Quizlet.Quiz4Question QuizQuestion;
@@ -136,5 +148,6 @@ namespace Client.Forms
         private System.Windows.Forms.ProgressBar prgTimeLeft;
         private System.Windows.Forms.Label lblTimeLeft;
         private System.Windows.Forms.Label lblCorrect;
+        private System.Windows.Forms.Button BtnHost;
     }
 }

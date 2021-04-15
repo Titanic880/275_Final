@@ -72,5 +72,25 @@ namespace Client.Forms
             Reset_Next();
             QuizQuestion.Enabled = true;
         }
+
+        private void BtnHost_Click(object sender, EventArgs e)
+        {
+            BtnSessionConnect.Enabled = false;
+            TbSession.Enabled = false;
+
+            //Prompts the user if they want it to be public
+            DialogResult res = MessageBox.Show("Is this session public?","",MessageBoxButtons.YesNo);
+            
+            Standards_Final.Sessions.New_Session ses = new Standards_Final.Sessions.New_Session
+            {
+                Host = Active_User.Active_User_Object
+            };
+
+            if (res == DialogResult.Yes)
+                ses.Is_Public = true;
+
+            //Sends the session request
+            LaunchForm.Host_.Send_To_Server(ses);
+        }
     }
 }
