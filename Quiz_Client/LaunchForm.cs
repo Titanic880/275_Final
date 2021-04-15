@@ -24,7 +24,7 @@ namespace Quiz_Client
         #region Buttons
         private void BtnLogin_Click(object sender, EventArgs e)
         {
-            Standards_Final.Sessions.Login_Request request = new Standards_Final.Sessions.Login_Request
+            Standards_Final.Network.Login_Request request = new Standards_Final.Network.Login_Request
             {
                 ReqUser = new Standards_Final.Users.User
                 (MTbUsername.Text,
@@ -36,7 +36,7 @@ namespace Quiz_Client
 
         private void BtnRegister_Click(object sender, EventArgs e)
         {
-            Standards_Final.Sessions.Register_Request request = new Standards_Final.Sessions.Register_Request
+            Standards_Final.Network.Register_Request request = new Standards_Final.Network.Register_Request
             {
                 Username = MTbUsername.Text,
                 Password = Standards.Hasher(MTbPass.Text)
@@ -66,7 +66,13 @@ namespace Quiz_Client
             Host_ = new Host_Connection(Ip);
             Host_.Login_Res += Host__Login_Res;
             Host_.FromServer += Host__FromServer;
+            Host_.msgbox += Host__msgbox;
             Host_Connected();
+        }
+
+        private void Host__msgbox(Standards_Final.Network.Error error)
+        {
+            MessageBox.Show(error.Time_Of.TimeOfDay+":"+error.Message);
         }
 
         private void Host__FromServer(object package)
@@ -98,7 +104,7 @@ namespace Quiz_Client
             TbCustomIP.Enabled = false;
         }
 
-        private void Host__Login_Res(Standards_Final.Sessions.Login_Result result)
+        private void Host__Login_Res(Standards_Final.Network.Login_Result result)
         {
             if (result.User != null)
             {

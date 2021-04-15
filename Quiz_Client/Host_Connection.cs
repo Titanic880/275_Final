@@ -8,6 +8,7 @@ using System.Text;
 using System.Linq;
 using System.IO;
 using System;
+using Standards_Final.Network;
 using Standards_Final.Sessions;
 
 namespace Quiz_Client
@@ -26,6 +27,9 @@ namespace Quiz_Client
 
         public event RecievedQuiz GetQuiz;
         public delegate void RecievedQuiz(Standards_Final.Quizlet.Quiz le_Quiz);
+
+        public event MBOX msgbox;
+        public delegate void MBOX(Error error);
         #endregion Delegates
 
         //User Stack
@@ -67,6 +71,10 @@ namespace Quiz_Client
                     Login_Res(LR);
                 else if (o is Standards_Final.Quizlet.Quiz Q)
                     GetQuiz(Q);
+                else if (o is Error err)
+                    msgbox(err);
+                else if (o is Session_Conn ses)
+                { }
                 else
                     FromServer(o);
             }

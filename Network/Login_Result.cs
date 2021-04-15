@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Standards_Final.Users;
+﻿using Standards_Final.Users;
+using System;
 
-namespace Standards_Final.Sessions
+namespace Standards_Final.Network
 {
     [Serializable()]
     public class Login_Result

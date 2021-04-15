@@ -41,6 +41,10 @@ namespace Server.Forms
             this.label3 = new System.Windows.Forms.Label();
             this.TbPass = new System.Windows.Forms.TextBox();
             this.BtnLogin = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lstSessions = new System.Windows.Forms.ListBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.listBox2 = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // label1
@@ -145,11 +149,49 @@ namespace Server.Forms
             this.BtnLogin.Text = "Login";
             this.BtnLogin.UseVisualStyleBackColor = true;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(295, 260);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(82, 13);
+            this.label4.TabIndex = 39;
+            this.label4.Text = "Active Sessions";
+            // 
+            // lstSessions
+            // 
+            this.lstSessions.FormattingEnabled = true;
+            this.lstSessions.Location = new System.Drawing.Point(298, 275);
+            this.lstSessions.Name = "lstSessions";
+            this.lstSessions.Size = new System.Drawing.Size(280, 186);
+            this.lstSessions.TabIndex = 37;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(9, 260);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(80, 13);
+            this.label5.TabIndex = 38;
+            this.label5.Text = "User Messages";
+            // 
+            // listBox2
+            // 
+            this.listBox2.FormattingEnabled = true;
+            this.listBox2.Location = new System.Drawing.Point(12, 275);
+            this.listBox2.Name = "listBox2";
+            this.listBox2.Size = new System.Drawing.Size(280, 186);
+            this.listBox2.TabIndex = 36;
+            // 
             // Main_Server
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(612, 282);
+            this.ClientSize = new System.Drawing.Size(612, 530);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.lstSessions);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.listBox2);
             this.Controls.Add(this.BtnLogin);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.TbPass);
@@ -182,5 +224,9 @@ namespace Server.Forms
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox TbPass;
         private System.Windows.Forms.Button BtnLogin;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ListBox lstSessions;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ListBox listBox2;
     }
 }

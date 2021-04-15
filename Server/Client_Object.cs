@@ -2,6 +2,7 @@
 using System.Runtime.Serialization;
 using System.Collections.Generic;
 using Standards_Final.Sessions;
+using Standards_Final.Network;
 using System.Threading.Tasks;
 using Standards_Final.Users;
 using System.ComponentModel;
@@ -42,6 +43,10 @@ namespace Server
         //Connects Anon users to a given session
         public event AnonSession AnonSess;
         public delegate void AnonSession(User_Temp Anon);
+
+        //Runs when a client requests a new session
+        public event NewSession Sess_New;
+        public delegate void NewSession(Client_Object client, New_Session new_);
         #endregion Delegates
 
         //Main worker
@@ -108,6 +113,8 @@ namespace Server
                     wkr.ReportProgress(4, LReq);
                 else if (o is User_Temp UserT)
                     wkr.ReportProgress(5, UserT);
+                else if (o is New_Session NSes)
+                    wkr.ReportProgress(6, NSes);
             }
         }
 
@@ -132,10 +139,10 @@ namespace Server
                     SendMessage(Server_DbLogic.Client_Login((Login_Request)e.UserState));
                     break;
                 case 5: //Temp User Connecting to session
-
-                    break;
-                case 6: 
                     AnonSess((User_Temp)e.UserState);
+                    break;
+                case 6: //Request for a new session 
+                    Sess_New(this, (New_Session)e.UserState);
                     break;
                 case 7:
 

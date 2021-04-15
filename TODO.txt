@@ -1,9 +1,6 @@
 LIMITATIONS:
 	ONLY 1 Quiz can happen at once
 	
-
-
-
 Forms:
 	.Launch (Login/Register)
 	.Login (Forwards to Home Form)

@@ -9,11 +9,13 @@ using System.Text;
 using System.Linq;
 using System.Net;
 using System;
-
+using Standards_Final.Network;
+using Standards_Final.Sessions;
 namespace Server.Forms
 {
     public partial class Main_Server : Form
     {
+        readonly Random rand = new Random();
         public static List<Client_Object> Clients = new List<Client_Object>();
         private Client_Object manager;
         private TcpListener tcpListener;
@@ -45,6 +47,46 @@ namespace Server.Forms
             manager.ClientDisconnected += ClientDisconnected;
             manager.ReceivedMessage += ReceivedMessage;
             manager.UserDef += UserDef;
+            manager.Sess_New += NewSession;
+        }
+
+        private void NewSession(Client_Object client, New_Session new_)
+        {
+            Error er = new Error
+            {
+                Message = "User not found!"
+            };
+            if (new_.Host == null)
+            {
+                client.SendMessage(er);
+            }
+            else
+            {
+                string Session_ID = null;
+                for (int i = 0; i > 6; i++)
+                {
+                    int Letter = rand.Next(26) + 65;
+                    bool Upper = Convert.ToBoolean(rand.Next(0, 1));
+                    if (Upper)
+                        Letter += 32;
+
+                    Session_ID += ((char)Letter).ToString();
+                }
+                Session_Conn Session = new Session_Conn(Session_ID);
+                foreach (Session_Conn con in lstSessions.Items)
+                {
+                    //Checks if the session already exists
+                    if (con.Session_ID == Session.Session_ID)
+                    {
+                        er.Message = "Invalid ID (Nice lottery~!)";
+                        client.SendMessage(er);
+                        return;
+                    }
+                }
+                lstSessions.Items.Add(Session);
+                Session.Is_Host = true;
+                client.SendMessage(Session);
+            }
         }
 
         private void UserDef(Client_Object client)

@@ -7,6 +7,7 @@ using Standards_Final.Users;
 
 namespace Standards_Final.Sessions
 {
+    [Serializable]
     /// <summary>
     /// used to request a new session from the server
     /// </summary>
