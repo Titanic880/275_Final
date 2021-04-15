@@ -8,39 +8,46 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Standards_Final;
+using Standards_Final.Network;
 using Standards_Final.Quizlet;
 
-namespace Server.Forms
+namespace Quiz_Client.Creation
 {
-
-
-    /// <summary>
-    /// DEPRECIATED
-    /// </summary>
     public partial class Create_Quiz : Form
     {
         private readonly Random rand = new Random();
         public Create_Quiz()
         {
             InitializeComponent();
+            //Sets up delegate before using it
+            LaunchForm.Host_.GetQuestion += Host__GetQuestions;
+            LaunchForm.Host_.Send_To_Server(new Request<Question[]>());
+        }
+
+        private void Host__GetQuestions(Question[] Q)
+        {
+            BeginInvoke(new MethodInvoker(() => LoadLists(Q)));
+        }
+
+        private void LoadLists(Question[] Q)
+        {
+            foreach(Question q in Q)
+            {
+                lstPub.AccessibleName = "Vis_Question";
+                lstPub.Items.Add(q);
+            }
         }
 
         private void BtnPubView_Click(object sender, EventArgs e)
         {
-            LoadQuiz((Standards_Final.Quizlet.Question)lstPub.SelectedItem);
+            LoadQuiz((Question)lstPub.SelectedItem);
         }
-
-        private void BtnPrivView_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void BtnQuiz_Click(object sender, EventArgs e)
         {
-
+            LoadQuiz((Question)lstQuiz.SelectedItem);
         }
 
-        private void LoadQuiz(Standards_Final.Quizlet.Question Q)
+        private void LoadQuiz(Question Q)
         {
             string[] QRand = Q.Vis_Answers.OrderBy(x => rand.Next()).ToArray();
 
@@ -71,13 +78,17 @@ namespace Server.Forms
                 return;
             else
             {
+                LaunchForm.Host_.Send_To_Server(new NewQuestion(C_question.Q));
                 lstPub.Items.Add(C_question.Q);
             }
         }
 
         private void BtnPubAdd_Click(object sender, EventArgs e)
         {
-            lstQuiz.Items.Add(lstPub.SelectedItem);
+            if(lstPub.SelectedIndex < lstPub.Items.Count 
+                || lstPub.SelectedIndex > 0 
+                || lstPub.SelectedIndex != -1)
+                lstQuiz.Items.Add(lstPub.SelectedItem);
         }
 
         private void BtnRemove_Click(object sender, EventArgs e)
@@ -89,19 +100,20 @@ namespace Server.Forms
         {
             Quiz quiz = new Quiz();
             List<Question> tmp = new List<Question>();
-            foreach(Question quest in lstQuiz.Items)
+            foreach (Question quest in lstQuiz.Items)
             {
                 tmp.Add(quest);
             }
             quiz.Qs = tmp.ToArray();
 
-            DialogResult dia = MessageBox.Show("Is this public?","Public?",MessageBoxButtons.YesNo);
+            DialogResult dia = MessageBox.Show("Is this public?", "Public?", MessageBoxButtons.YesNo);
 
             if (dia == DialogResult.Yes)
                 quiz.Accessiblity = true;
+            quiz.Creator = Active_User.Active_User_Object;
             quiz.AccessUsers.Add(quiz.Creator);
-            
-            //NEEDS TO BE FINISHED
+
+            LaunchForm.Host_.Send_To_Server(new NewQuiz(quiz));   
         }
     }
 }

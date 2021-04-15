@@ -183,21 +183,9 @@
     </Compile>
     <Compile Include="Framework-Ent\Server_DbContext.cs" />
     <Compile Include="Framework-Ent\Server_DbLogic.cs" />
-    <Compile Include="Migrations\20210414183514_Init.cs" />
-    <Compile Include="Migrations\20210414183514_Init.designer.cs">
-      <DependentUpon>20210414183514_Init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20210414212548_Quiz.cs" />
-    <Compile Include="Migrations\20210414212548_Quiz.designer.cs">
-      <DependentUpon>20210414212548_Quiz.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20210415175243_SessionUpdated1.cs" />
-    <Compile Include="Migrations\20210415175243_SessionUpdated1.designer.cs">
-      <DependentUpon>20210415175243_SessionUpdated1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20210415190708_UpdatedQuestionNQuiz.cs" />
-    <Compile Include="Migrations\20210415190708_UpdatedQuestionNQuiz.designer.cs">
-      <DependentUpon>20210415190708_UpdatedQuestionNQuiz.cs</DependentUpon>
+    <Compile Include="Migrations\20210415212058_init.cs" />
+    <Compile Include="Migrations\20210415212058_init.designer.cs">
+      <DependentUpon>20210415212058_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Server_DbContextModelSnapshot.cs" />
     <Compile Include="Program.cs" />

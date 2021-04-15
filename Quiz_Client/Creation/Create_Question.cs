@@ -3,11 +3,8 @@ using Standards_Final.Quizlet;
 using System.Windows.Forms;
 using System;
 
-namespace Server.Forms
+namespace Quiz_Client.Creation
 {
-    /// <summary>
-    /// DEPRECIATED
-    /// </summary>
     public partial class Create_Question : Form
     {
         public Question Q { get; private set; }
@@ -52,11 +49,11 @@ namespace Server.Forms
                     if (int.TryParse(TbQ.Text, out int res))
                         Timer = res;
 
-                    Q = new Question(Framework_Ent.Server_DbLogic.Host_Client,
+                    Q = new Question(Active_User.Active_User_Object,
                                      TbQ.Text,
                                      Answers.ToArray(),
                                      C_Answers.ToArray(),
-                                     DateTime.Now, 
+                                     DateTime.Now,
                                      Timer);
 
                     this.Close();

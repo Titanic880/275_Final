@@ -10,8 +10,8 @@ using Server.Framework_Ent;
 namespace Server.Migrations
 {
     [DbContext(typeof(Server_DbContext))]
-    [Migration("20210415175243_SessionUpdated1")]
-    partial class SessionUpdated1
+    [Migration("20210415212058_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,9 +27,6 @@ namespace Server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("Accessiblity")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Correct_Answers_Str")
                         .HasColumnType("nvarchar(max)");
@@ -63,7 +60,15 @@ namespace Server.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("Accessiblity")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("CreatorId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatorId");
 
                     b.ToTable("Db_Quizzes");
                 });
@@ -72,6 +77,9 @@ namespace Server.Migrations
                 {
                     b.Property<string>("Session_ID")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("Is_Host")
+                        .HasColumnType("bit");
 
                     b.HasKey("Session_ID");
 
@@ -91,12 +99,20 @@ namespace Server.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("QuizId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Temp")
+                        .HasColumnType("bit");
+
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("Current_SessionSession_ID");
+
+                    b.HasIndex("QuizId");
 
                     b.ToTable("Db_Users");
                 });
@@ -108,11 +124,22 @@ namespace Server.Migrations
                         .HasForeignKey("QuizId");
                 });
 
+            modelBuilder.Entity("Standards_Final.Quizlet.Quiz", b =>
+                {
+                    b.HasOne("Standards_Final.Users.User", "Creator")
+                        .WithMany()
+                        .HasForeignKey("CreatorId");
+                });
+
             modelBuilder.Entity("Standards_Final.Users.User", b =>
                 {
                     b.HasOne("Standards_Final.Sessions.Session_Conn", "Current_Session")
                         .WithMany()
                         .HasForeignKey("Current_SessionSession_ID");
+
+                    b.HasOne("Standards_Final.Quizlet.Quiz", null)
+                        .WithMany("AccessUsers")
+                        .HasForeignKey("QuizId");
                 });
 #pragma warning restore 612, 618
         }

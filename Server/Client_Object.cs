@@ -12,6 +12,7 @@ using System.Text;
 using System.Linq;
 using System.IO;
 using System;
+using Standards_Final.Quizlet;
 
 namespace Server
 {
@@ -35,10 +36,6 @@ namespace Server
         //Runs when the user class is assigned
         public event UserDefined UserDef;
         public delegate void UserDefined(Client_Object client);
-
-        //Connects Anon users to a given session
-        public event AnonSession AnonSess;
-        public delegate void AnonSession(User_Temp Anon);
 
         //Runs when a client requests a new session
         public event NewSession Sess_New;
@@ -107,10 +104,14 @@ namespace Server
                     wkr.ReportProgress(3, ResReq);
                 else if (o is Login_Request LReq)
                     wkr.ReportProgress(4, LReq);
-                else if (o is User_Temp UserT)
-                    wkr.ReportProgress(5, UserT);
                 else if (o is New_Session NSes)
                     wkr.ReportProgress(6, NSes);
+                else if (o is NewQuestion || o is NewQuiz)
+                    wkr.ReportProgress(7, o);
+                else if (o is Request<Quiz[]>)
+                    wkr.ReportProgress(8, o);
+                else if (o is Request<Question[]>)
+                    wkr.ReportProgress(9,o);
             }
         }
 
@@ -135,13 +136,21 @@ namespace Server
                     SendMessage(Server_DbLogic.Client_Login((Login_Request)e.UserState));
                     break;
                 case 5: //Temp User Connecting to session
-                    AnonSess((User_Temp)e.UserState);
                     break;
                 case 6: //Request for a new session 
                     Sess_New(this, (New_Session)e.UserState);
                     break;
                 case 7:
-
+                    if (e.UserState is NewQuestion)
+                        Server_DbLogic.Add_Question(((NewQuestion)e.UserState).NewQ);
+                    else if (e.UserState is NewQuiz)
+                        Server_DbLogic.Add_Quiz(((NewQuiz)e.UserState).newQ);
+                    break;
+                case 8:
+                    this.SendMessage(Server_DbLogic.Get_Quiz(this.User_Obj));
+                    break;
+                case 9:
+                    this.SendMessage(Server_DbLogic.Get_Questions());
                     break;
             }
         }

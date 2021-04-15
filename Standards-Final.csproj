@@ -46,16 +46,17 @@
     <Compile Include="Network\DisconnectUser.cs" />
     <Compile Include="Network\Login_Request.cs" />
     <Compile Include="Network\Login_Result.cs" />
+    <Compile Include="Network\NewQuestion.cs" />
+    <Compile Include="Network\NewQuiz.cs" />
     <Compile Include="Network\Register_Request.cs" />
+    <Compile Include="Network\Request.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Quizlet\Question.cs" />
     <Compile Include="Quizlet\Quiz.cs" />
-    <Compile Include="Sessions\Message.cs" />
     <Compile Include="Sessions\New_Session.cs" />
     <Compile Include="Sessions\Session_Conn.cs" />
     <Compile Include="Standards.cs" />
     <Compile Include="Users\User.cs" />
-    <Compile Include="Users\User_Temp.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

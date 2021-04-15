@@ -8,7 +8,6 @@ namespace Standards_Final.Network
     {
         public bool New_User { get; set; } = false;
         public User User { get; private set; }
-        public User_Temp Temp { get; set; }
 
         public Login_Result(User u)
         {

@@ -47,6 +47,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Active_User.cs" />
+    <Compile Include="Creation\Create_Question.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Creation\Create_Question.Designer.cs">
+      <DependentUpon>Create_Question.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Creation\Create_Quiz.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Creation\Create_Quiz.Designer.cs">
+      <DependentUpon>Create_Quiz.cs</DependentUpon>
+    </Compile>
     <Compile Include="Home.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,6 +80,18 @@
     <Compile Include="QuizQuestion.Designer.cs">
       <DependentUpon>QuizQuestion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Session_Control.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Session_Control.Designer.cs">
+      <DependentUpon>Session_Control.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Creation\Create_Question.resx">
+      <DependentUpon>Create_Question.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Creation\Create_Quiz.resx">
+      <DependentUpon>Create_Quiz.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
     </EmbeddedResource>
@@ -85,6 +109,9 @@
     </Compile>
     <EmbeddedResource Include="QuizQuestion.resx">
       <DependentUpon>QuizQuestion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Session_Control.resx">
+      <DependentUpon>Session_Control.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

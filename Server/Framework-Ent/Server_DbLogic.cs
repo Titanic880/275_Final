@@ -32,7 +32,7 @@ namespace Server.Framework_Ent
 
             if (Host_Client != null)
                 ret = true;
-            
+
             return ret;
         }
 
@@ -80,7 +80,7 @@ namespace Server.Framework_Ent
                     .Where(x => x.UserName == request.ReqUser.UserName
                     && x.Password == request.ReqUser.Password).FirstOrDefault());
             }
-            if(ret == null)
+            if (ret == null)
             {
                 ret = new Login_Result(null);
             }
@@ -101,9 +101,9 @@ namespace Server.Framework_Ent
                 User Test = db.Db_Users
                     .Where(x => x.UserName == newUser.UserName
                     && x.Password == newUser.Password).FirstOrDefault();
-                if(Test != null)
+                if (Test != null)
                     return Client_Login(new Login_Request(Test));
-                
+
 
                 db.Db_Users.Add(newUser);
                 db.SaveChanges();
@@ -111,5 +111,55 @@ namespace Server.Framework_Ent
             }
         }
         #endregion Client
+
+        #region Questions
+
+        public static void Add_Question(Standards_Final.Quizlet.Question question)
+        {
+            using (Server_DbContext db = new Server_DbContext())
+            {
+                //Adds question if it doesn't already exist
+                if (!db.Db_Questions.Contains(question))
+                    db.Db_Questions.Add(question);
+                db.SaveChanges();
+            }
+        }
+
+        public static Standards_Final.Quizlet.Question[] Get_Questions()
+        {
+            Standards_Final.Quizlet.Question[] arr;
+            using (Server_DbContext db = new Server_DbContext())
+            {
+                arr = db.Db_Questions.ToArray();
+            }
+            return arr;
+        }
+        #endregion Questions
+        #region Quiz
+        public static void Add_Quiz(Standards_Final.Quizlet.Quiz quiz)
+        {
+            using (Server_DbContext db = new Server_DbContext())
+            {
+                //Adds quiz if it doesn't already exist
+                if (!db.Db_Quizzes.Contains(quiz))
+                    db.Db_Quizzes.Add(quiz);
+                db.SaveChanges();
+            }
+        }
+        public static Standards_Final.Quizlet.Quiz[] Get_Quiz(User user = null)
+        {
+            Standards_Final.Quizlet.Quiz[] arr;
+            using (Server_DbContext db = new Server_DbContext()) 
+            {
+                if (user == null)
+                    arr = db.Db_Quizzes.Where(x => x.Accessiblity == true).ToArray();
+                else
+                    arr = db.Db_Quizzes.Where(x => x.Accessiblity == true 
+                                            ||x.AccessUsers.Contains(user)).ToArray();
+            }
+            return arr;
+        }
+
+        #endregion Quiz
     }
 }

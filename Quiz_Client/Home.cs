@@ -22,9 +22,16 @@ namespace Quiz_Client
         public Home()
         {
             InitializeComponent();
+            LaunchForm.Host_.GetSession += Host__GetSession;
             TimeLeft.Interval = 100;
             TimeLeft.Tick += TimeLeft_Tick;
             Quiz_Question.Enabled = false;
+        }
+
+        private void Host__GetSession(Standards_Final.Sessions.Session_Conn session)
+        {
+            lblSession.Text = lblSession.Text + " "+ session.Session_ID;
+            Active_User.Active_User_Object.Current_Session = session;
         }
 
         private void TimeLeft_Tick(object sender, EventArgs e)
@@ -93,6 +100,11 @@ namespace Quiz_Client
 
             //Sends the session request
             LaunchForm.Host_.Send_To_Server(ses);
+        }
+
+        private void BtnCreate_Click(object sender, EventArgs e)
+        {
+            new Creation.Create_Quiz().ShowDialog();
         }
     }
 }

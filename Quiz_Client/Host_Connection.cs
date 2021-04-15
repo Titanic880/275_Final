@@ -10,6 +10,7 @@ using System.IO;
 using System;
 using Standards_Final.Network;
 using Standards_Final.Sessions;
+using Standards_Final.Quizlet;
 
 namespace Quiz_Client
 {
@@ -33,6 +34,9 @@ namespace Quiz_Client
 
         public event Session GetSession;
         public delegate void Session(Session_Conn session);
+
+        public event GetQuizQuest GetQuestion;
+        public delegate void GetQuizQuest(Question[] Q);
         #endregion Delegates
 
         //User Stack
@@ -72,12 +76,14 @@ namespace Quiz_Client
 
                 if (o is Login_Result LR)
                     Login_Res(LR);
-                else if (o is Standards_Final.Quizlet.Quiz Q)
+                else if (o is Quiz Q)
                     GetQuiz(Q);
                 else if (o is Session_Conn ses)
                     GetSession(ses);
-                else if (o is Standards_Final.Quizlet.Question q)
+                else if (o is Question q)
                     QuestionGet(q);
+                else if (o is Question[] qArr)
+                    GetQuestion(qArr);
                 else
                     FromServer(o);
             }

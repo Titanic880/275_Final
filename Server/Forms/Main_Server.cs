@@ -45,25 +45,18 @@ namespace Server.Forms
             manager = new Client_Object(tcpListener);
             manager.NewClientConnected += NewClientConnected;
             manager.ClientDisconnected += ClientDisconnected;
-            manager.ReceivedMessage += ReceivedMessage;
             manager.UserDef += UserDef;
             manager.Sess_New += NewSession;
         }
 
         private void NewSession(Client_Object client, New_Session new_)
         {
-            Error er = new Error
-            {
-                Message = "User not found!"
-            };
             if (new_.Host == null)
-            {
-                client.SendMessage(er);
-            }
+                return;            
             else
             {
                 string Session_ID = null;
-                for (int i = 0; i > 6; i++)
+                for (int i = 0; i < 6; i++)
                 {
                     int Letter = rand.Next(26) + 65;
                     bool Upper = Convert.ToBoolean(rand.Next(0, 1));
@@ -78,11 +71,10 @@ namespace Server.Forms
                     //Checks if the session already exists
                     if (con.Session_ID == Session.Session_ID)
                     {
-                        er.Message = "Invalid ID (Nice lottery~!)";
-                        client.SendMessage(er);
                         return;
                     }
                 }
+                lstSessions.AccessibleName = "Session_ID";
                 lstSessions.Items.Add(Session);
                 Session.Is_Host = true;
                 client.SendMessage(Session);
@@ -113,11 +105,6 @@ namespace Server.Forms
                     lstError.Items.Add(msg);
                Client_Object.ClientCounter--;
             }
-        }
-
-        private void ReceivedMessage(Client_Object client, object Item)
-        {
-            throw new NotImplementedException();
         }
 
         private void RelayMessage(object message)

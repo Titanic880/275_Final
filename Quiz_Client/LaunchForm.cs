@@ -15,10 +15,6 @@ namespace Quiz_Client
     public partial class LaunchForm : Form
     {
         public static Host_Connection Host_ { get; private set; }
-        private Home hom;
-
-        public event QuestionPass PassQ;
-        public delegate void QuestionPass(Standards_Final.Quizlet.Question question);
 
         public LaunchForm()
         {
@@ -63,6 +59,7 @@ namespace Quiz_Client
                 UserName = TbNick.Text
             };
             anon.Current_Session.Session_ID = TbSession.Text;
+            anon.Temp = true;
 
             Host_.Send_To_Server(anon);
         }
@@ -84,8 +81,7 @@ namespace Quiz_Client
         private void OpenHome()
         {
             this.Hide();
-            hom = new Home();
-            hom.ShowDialog();
+            new Home().ShowDialog();
             this.Show();
         }
 

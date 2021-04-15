@@ -15,8 +15,15 @@ namespace Standards_Final.Quizlet
         public Users.User Creator { get; }
         public string Vis_Question { get; set; }
 
+        /// <summary>
+        /// 2-4 Answers
+        /// </summary>
         public string Vis_Answers_Str { get; set; }
         public string[] Vis_Answers  { get { return Vis_Answers_Str.Split(','); } }
+
+        /// <summary>
+        /// Answers considered right/Correct
+        /// </summary>
         public string Correct_Answers_Str { get; set; }
         public string[] Correct_Answers { get { return Correct_Answers_Str.Split(','); } }
 
@@ -54,6 +61,11 @@ namespace Standards_Final.Quizlet
 
             Created_Question = Created_Date;
             Question_Time = Timer;
+        }
+
+        public override string ToString()
+        {
+            return Vis_Question;
         }
     }
 }

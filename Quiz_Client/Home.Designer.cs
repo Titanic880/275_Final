@@ -38,7 +38,7 @@ namespace Quiz_Client
             this.BtnSessionConnect = new System.Windows.Forms.Button();
             this.TbSession = new System.Windows.Forms.TextBox();
             this.Quiz_Question = new Quiz_Client.QuizQuestion();
-            this.lstQuiz = new System.Windows.Forms.ListBox();
+            this.BtnCreate = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // BtnHost
@@ -118,20 +118,22 @@ namespace Quiz_Client
             this.Quiz_Question.Size = new System.Drawing.Size(262, 304);
             this.Quiz_Question.TabIndex = 17;
             // 
-            // lstQuiz
+            // BtnCreate
             // 
-            this.lstQuiz.FormattingEnabled = true;
-            this.lstQuiz.Location = new System.Drawing.Point(12, 162);
-            this.lstQuiz.Name = "lstQuiz";
-            this.lstQuiz.Size = new System.Drawing.Size(120, 277);
-            this.lstQuiz.TabIndex = 18;
+            this.BtnCreate.Location = new System.Drawing.Point(12, 162);
+            this.BtnCreate.Name = "BtnCreate";
+            this.BtnCreate.Size = new System.Drawing.Size(120, 37);
+            this.BtnCreate.TabIndex = 18;
+            this.BtnCreate.Text = "Create Quiz!";
+            this.BtnCreate.UseVisualStyleBackColor = true;
+            this.BtnCreate.Click += new System.EventHandler(this.BtnCreate_Click);
             // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.lstQuiz);
+            this.Controls.Add(this.BtnCreate);
             this.Controls.Add(this.Quiz_Question);
             this.Controls.Add(this.BtnHost);
             this.Controls.Add(this.lblCorrect);
@@ -159,6 +161,6 @@ namespace Quiz_Client
         private System.Windows.Forms.Button BtnSessionConnect;
         private System.Windows.Forms.TextBox TbSession;
         private QuizQuestion Quiz_Question;
-        private System.Windows.Forms.ListBox lstQuiz;
+        private System.Windows.Forms.Button BtnCreate;
     }
 }

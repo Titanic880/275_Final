@@ -31,12 +31,8 @@ namespace Server.Forms
         {
             this.lstPub = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.lstPriv = new System.Windows.Forms.ListBox();
             this.BtnPubAdd = new System.Windows.Forms.Button();
-            this.BtnPrivAdd = new System.Windows.Forms.Button();
             this.BtnPubView = new System.Windows.Forms.Button();
-            this.BtnPrivView = new System.Windows.Forms.Button();
             this.BtnQuiz = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.lstQuiz = new System.Windows.Forms.ListBox();
@@ -47,12 +43,13 @@ namespace Server.Forms
             this.BtnQ2 = new System.Windows.Forms.Button();
             this.BtnQ1 = new System.Windows.Forms.Button();
             this.BtnCreate = new System.Windows.Forms.Button();
+            this.BtnFinish = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lstPub
             // 
             this.lstPub.FormattingEnabled = true;
-            this.lstPub.Location = new System.Drawing.Point(12, 26);
+            this.lstPub.Location = new System.Drawing.Point(138, 26);
             this.lstPub.Name = "lstPub";
             this.lstPub.Size = new System.Drawing.Size(120, 368);
             this.lstPub.TabIndex = 0;
@@ -60,28 +57,11 @@ namespace Server.Forms
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 10);
+            this.label1.Location = new System.Drawing.Point(138, 10);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(86, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Public Questions";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(138, 10);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Your Questions";
-            // 
-            // lstPriv
-            // 
-            this.lstPriv.FormattingEnabled = true;
-            this.lstPriv.Location = new System.Drawing.Point(138, 26);
-            this.lstPriv.Name = "lstPriv";
-            this.lstPriv.Size = new System.Drawing.Size(120, 368);
-            this.lstPriv.TabIndex = 2;
             // 
             // BtnPubAdd
             // 
@@ -89,37 +69,19 @@ namespace Server.Forms
             this.BtnPubAdd.Name = "BtnPubAdd";
             this.BtnPubAdd.Size = new System.Drawing.Size(105, 23);
             this.BtnPubAdd.TabIndex = 4;
-            this.BtnPubAdd.Text = "Add from public";
+            this.BtnPubAdd.Text = "Add from List";
             this.BtnPubAdd.UseVisualStyleBackColor = true;
-            // 
-            // BtnPrivAdd
-            // 
-            this.BtnPrivAdd.Location = new System.Drawing.Point(264, 55);
-            this.BtnPrivAdd.Name = "BtnPrivAdd";
-            this.BtnPrivAdd.Size = new System.Drawing.Size(105, 23);
-            this.BtnPrivAdd.TabIndex = 5;
-            this.BtnPrivAdd.Text = "Add from private";
-            this.BtnPrivAdd.UseVisualStyleBackColor = true;
+            this.BtnPubAdd.Click += new System.EventHandler(this.BtnPubAdd_Click);
             // 
             // BtnPubView
             // 
-            this.BtnPubView.Location = new System.Drawing.Point(12, 400);
+            this.BtnPubView.Location = new System.Drawing.Point(138, 400);
             this.BtnPubView.Name = "BtnPubView";
             this.BtnPubView.Size = new System.Drawing.Size(120, 23);
             this.BtnPubView.TabIndex = 6;
             this.BtnPubView.Text = "View Question";
             this.BtnPubView.UseVisualStyleBackColor = true;
             this.BtnPubView.Click += new System.EventHandler(this.BtnPubView_Click);
-            // 
-            // BtnPrivView
-            // 
-            this.BtnPrivView.Location = new System.Drawing.Point(138, 400);
-            this.BtnPrivView.Name = "BtnPrivView";
-            this.BtnPrivView.Size = new System.Drawing.Size(120, 23);
-            this.BtnPrivView.TabIndex = 7;
-            this.BtnPrivView.Text = "View Question";
-            this.BtnPrivView.UseVisualStyleBackColor = true;
-            this.BtnPrivView.Click += new System.EventHandler(this.BtnPrivView_Click);
             // 
             // BtnQuiz
             // 
@@ -150,12 +112,13 @@ namespace Server.Forms
             // 
             // BtnRemove
             // 
-            this.BtnRemove.Location = new System.Drawing.Point(264, 137);
+            this.BtnRemove.Location = new System.Drawing.Point(264, 109);
             this.BtnRemove.Name = "BtnRemove";
             this.BtnRemove.Size = new System.Drawing.Size(105, 23);
             this.BtnRemove.TabIndex = 12;
             this.BtnRemove.Text = "Remove from Quiz";
             this.BtnRemove.UseVisualStyleBackColor = true;
+            this.BtnRemove.Click += new System.EventHandler(this.BtnRemove_Click);
             // 
             // lblQuestion
             // 
@@ -206,7 +169,7 @@ namespace Server.Forms
             // 
             // BtnCreate
             // 
-            this.BtnCreate.Location = new System.Drawing.Point(264, 84);
+            this.BtnCreate.Location = new System.Drawing.Point(264, 56);
             this.BtnCreate.Name = "BtnCreate";
             this.BtnCreate.Size = new System.Drawing.Size(105, 47);
             this.BtnCreate.TabIndex = 18;
@@ -214,11 +177,22 @@ namespace Server.Forms
             this.BtnCreate.UseVisualStyleBackColor = true;
             this.BtnCreate.Click += new System.EventHandler(this.BtnCreate_Click);
             // 
+            // BtnFinish
+            // 
+            this.BtnFinish.Location = new System.Drawing.Point(264, 138);
+            this.BtnFinish.Name = "BtnFinish";
+            this.BtnFinish.Size = new System.Drawing.Size(105, 33);
+            this.BtnFinish.TabIndex = 19;
+            this.BtnFinish.Text = "Finish Quiz";
+            this.BtnFinish.UseVisualStyleBackColor = true;
+            this.BtnFinish.Click += new System.EventHandler(this.BtnFinish_Click);
+            // 
             // Create_Quiz
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(821, 450);
+            this.Controls.Add(this.BtnFinish);
             this.Controls.Add(this.BtnCreate);
             this.Controls.Add(this.lblQuestion);
             this.Controls.Add(this.BtnQ4);
@@ -229,12 +203,8 @@ namespace Server.Forms
             this.Controls.Add(this.BtnQuiz);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lstQuiz);
-            this.Controls.Add(this.BtnPrivView);
             this.Controls.Add(this.BtnPubView);
-            this.Controls.Add(this.BtnPrivAdd);
             this.Controls.Add(this.BtnPubAdd);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.lstPriv);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lstPub);
             this.Name = "Create_Quiz";
@@ -248,12 +218,8 @@ namespace Server.Forms
 
         private System.Windows.Forms.ListBox lstPub;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ListBox lstPriv;
         private System.Windows.Forms.Button BtnPubAdd;
-        private System.Windows.Forms.Button BtnPrivAdd;
         private System.Windows.Forms.Button BtnPubView;
-        private System.Windows.Forms.Button BtnPrivView;
         private System.Windows.Forms.Button BtnQuiz;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ListBox lstQuiz;
@@ -264,5 +230,6 @@ namespace Server.Forms
         private System.Windows.Forms.Button BtnQ2;
         private System.Windows.Forms.Button BtnQ1;
         private System.Windows.Forms.Button BtnCreate;
+        private System.Windows.Forms.Button BtnFinish;
     }
 }

@@ -100,6 +100,9 @@ namespace Server.Migrations
                     b.Property<int?>("QuizId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("Temp")
+                        .HasColumnType("bit");
+
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
 

@@ -70,7 +70,7 @@ namespace Quiz_Client
             this.TbSession.Location = new System.Drawing.Point(278, 107);
             this.TbSession.Name = "TbSession";
             this.TbSession.Size = new System.Drawing.Size(125, 20);
-            this.TbSession.TabIndex = 33;
+            this.TbSession.TabIndex = 8;
             // 
             // TbNick
             // 
@@ -78,7 +78,7 @@ namespace Quiz_Client
             this.TbNick.Location = new System.Drawing.Point(278, 68);
             this.TbNick.Name = "TbNick";
             this.TbNick.Size = new System.Drawing.Size(125, 20);
-            this.TbNick.TabIndex = 32;
+            this.TbNick.TabIndex = 7;
             // 
             // BtnAnon
             // 
@@ -86,7 +86,7 @@ namespace Quiz_Client
             this.BtnAnon.Location = new System.Drawing.Point(278, 133);
             this.BtnAnon.Name = "BtnAnon";
             this.BtnAnon.Size = new System.Drawing.Size(125, 35);
-            this.BtnAnon.TabIndex = 31;
+            this.BtnAnon.TabIndex = 9;
             this.BtnAnon.Text = "Connect Anon";
             this.BtnAnon.UseVisualStyleBackColor = true;
             this.BtnAnon.Click += new System.EventHandler(this.BtnAnon_Click);
@@ -116,7 +116,7 @@ namespace Quiz_Client
             this.MTbPass.Name = "MTbPass";
             this.MTbPass.PasswordChar = '*';
             this.MTbPass.Size = new System.Drawing.Size(125, 20);
-            this.MTbPass.TabIndex = 28;
+            this.MTbPass.TabIndex = 4;
             this.MTbPass.UseSystemPasswordChar = true;
             // 
             // MTbUsername
@@ -133,7 +133,7 @@ namespace Quiz_Client
             this.BtnLogin.Location = new System.Drawing.Point(147, 133);
             this.BtnLogin.Name = "BtnLogin";
             this.BtnLogin.Size = new System.Drawing.Size(125, 35);
-            this.BtnLogin.TabIndex = 26;
+            this.BtnLogin.TabIndex = 5;
             this.BtnLogin.Text = "Login";
             this.BtnLogin.UseVisualStyleBackColor = true;
             this.BtnLogin.Click += new System.EventHandler(this.BtnLogin_Click);
@@ -144,7 +144,7 @@ namespace Quiz_Client
             this.BtnRegister.Location = new System.Drawing.Point(147, 174);
             this.BtnRegister.Name = "BtnRegister";
             this.BtnRegister.Size = new System.Drawing.Size(125, 35);
-            this.BtnRegister.TabIndex = 25;
+            this.BtnRegister.TabIndex = 6;
             this.BtnRegister.Text = "Register";
             this.BtnRegister.UseVisualStyleBackColor = true;
             this.BtnRegister.Click += new System.EventHandler(this.BtnRegister_Click);
@@ -163,14 +163,14 @@ namespace Quiz_Client
             this.TbCustomIP.Location = new System.Drawing.Point(16, 107);
             this.TbCustomIP.Name = "TbCustomIP";
             this.TbCustomIP.Size = new System.Drawing.Size(125, 20);
-            this.TbCustomIP.TabIndex = 23;
+            this.TbCustomIP.TabIndex = 0;
             // 
             // BtnConnectCustom
             // 
             this.BtnConnectCustom.Location = new System.Drawing.Point(16, 133);
             this.BtnConnectCustom.Name = "BtnConnectCustom";
             this.BtnConnectCustom.Size = new System.Drawing.Size(125, 35);
-            this.BtnConnectCustom.TabIndex = 22;
+            this.BtnConnectCustom.TabIndex = 1;
             this.BtnConnectCustom.Text = "Custom Connect";
             this.BtnConnectCustom.UseVisualStyleBackColor = true;
             this.BtnConnectCustom.Click += new System.EventHandler(this.BtnConnectCustom_Click);
@@ -180,7 +180,7 @@ namespace Quiz_Client
             this.BtnHostCon.Location = new System.Drawing.Point(16, 174);
             this.BtnHostCon.Name = "BtnHostCon";
             this.BtnHostCon.Size = new System.Drawing.Size(125, 35);
-            this.BtnHostCon.TabIndex = 21;
+            this.BtnHostCon.TabIndex = 2;
             this.BtnHostCon.Text = "Connect to Host";
             this.BtnHostCon.UseVisualStyleBackColor = true;
             this.BtnHostCon.Click += new System.EventHandler(this.BtnHostCon_Click);
