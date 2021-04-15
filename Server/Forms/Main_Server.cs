@@ -61,7 +61,7 @@ namespace Server.Forms
 
         private void ClientDisconnected(Client_Object client)
         {
-            string msg = null;
+            string msg;
             if (client.User_Obj == null)
                 msg = "A client has disconnected";
             else
