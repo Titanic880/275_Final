@@ -9,7 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Standards_Final;
-namespace Client.Forms
+
+namespace Quiz_Client
 {
     public partial class LaunchForm : Form
     {
@@ -26,7 +27,7 @@ namespace Client.Forms
             Standards_Final.Sessions.Login_Request request = new Standards_Final.Sessions.Login_Request
             {
                 ReqUser = new Standards_Final.Users.User
-                (MTbUsername.Text, 
+                (MTbUsername.Text,
                 Standards.Hasher(MTbPass.Text))
             };
 
@@ -70,7 +71,7 @@ namespace Client.Forms
 
         private void Host__FromServer(object package)
         {
-            
+
         }
 
         private void OpenHome()
@@ -87,11 +88,11 @@ namespace Client.Forms
             BtnRegister.Enabled = true;
             MTbUsername.Enabled = true;
             MTbPass.Enabled = true;
-            
+
             BtnAnon.Enabled = true;
             TbNick.Enabled = true;
             TbSession.Enabled = true;
-            
+
             BtnConnectCustom.Enabled = false;
             BtnHostCon.Enabled = false;
             TbCustomIP.Enabled = false;
@@ -122,4 +123,4 @@ namespace Client.Forms
         }
         #endregion
     }
-}
+    }

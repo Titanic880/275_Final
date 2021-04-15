@@ -1,8 +1,10 @@
-﻿using System.Windows.Forms;
-using Client.Forms;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
-namespace Client
+namespace Quiz_Client
 {
     static class Program
     {
@@ -14,10 +16,7 @@ namespace Client
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            LaunchForm frm = new LaunchForm();
-            Application.Run(frm);
-            LaunchForm.Host_.Send_To_Server(new Standards_Final.Sessions.DisconnectUser());
-            frm.Dispose();
+            Application.Run(new LaunchForm());
         }
     }
 }

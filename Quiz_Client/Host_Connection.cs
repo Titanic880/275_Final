@@ -10,7 +10,7 @@ using System.IO;
 using System;
 using Standards_Final.Sessions;
 
-namespace Client
+namespace Quiz_Client
 {
     public class Host_Connection
     {

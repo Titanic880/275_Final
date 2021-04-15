@@ -8,9 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Client.Forms.Quizlet
+namespace Quiz_Client
 {
-    public partial class Quiz4Question : UserControl
+    public partial class QuizQuestion : UserControl
     {
         private readonly Random rand = new Random();
         /// <summary>
@@ -19,13 +19,13 @@ namespace Client.Forms.Quizlet
         public bool Correct { get; private set; } = false;
         private readonly Standards_Final.Quizlet.Question q;
 
-        public Quiz4Question() { InitializeComponent(); }
-        public Quiz4Question(Standards_Final.Quizlet.Question Q)
+        public QuizQuestion() { InitializeComponent(); }
+        public QuizQuestion(Standards_Final.Quizlet.Question Q)
         {
             InitializeComponent();
             q = Q;
             string[] QRand = Q.Vis_Answers.OrderBy(x => rand.Next()).ToArray();
-            
+
             //Loads label
             lblQuestion.Text = Q.Vis_Question;
             //Loads buttons with the answers
@@ -33,12 +33,12 @@ namespace Client.Forms.Quizlet
             BtnQ2.Text = QRand[1];
 
             //Checks if the answers exist
-            if(QRand.Length >= 3)
+            if (QRand.Length >= 3)
             {
                 BtnQ3.Text = QRand[2];
                 BtnQ3.Enabled = true;
             }
-            if(QRand.Length == 4)
+            if (QRand.Length == 4)
             {
                 BtnQ4.Text = QRand[3];
                 BtnQ4.Enabled = true;
