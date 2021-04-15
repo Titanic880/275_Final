@@ -32,10 +32,6 @@ namespace Server
         public event ClientDisconnectedEventHandler ClientDisconnected;
         public delegate void ClientDisconnectedEventHandler(Client_Object client);
 
-        //Handles user messages
-        public event ReceivedMessageEventHandler ReceivedMessage;
-        public delegate void ReceivedMessageEventHandler(Client_Object client, object Item);
-
         //Runs when the user class is assigned
         public event UserDefined UserDef;
         public delegate void UserDefined(Client_Object client);

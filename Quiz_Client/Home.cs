@@ -17,6 +17,7 @@ namespace Quiz_Client
         private int Question_Current = 0;
         //QuizQuestion Quiz_Question = new QuizQuestion();
 
+
         private int Correct_Answers = 0;
         public Home()
         {

@@ -15,6 +15,11 @@ namespace Quiz_Client
     public partial class LaunchForm : Form
     {
         public static Host_Connection Host_ { get; private set; }
+        private Home hom;
+
+        public event QuestionPass PassQ;
+        public delegate void QuestionPass(Standards_Final.Quizlet.Question question);
+
         public LaunchForm()
         {
             InitializeComponent();
@@ -52,27 +57,23 @@ namespace Quiz_Client
 
         private void BtnAnon_Click(object sender, EventArgs e)
         {
-            Standards_Final.Users.User_Temp tmp = new Standards_Final.Users.User_Temp
+            //Creates a user and passes it to the server
+            Standards_Final.Users.User anon = new Standards_Final.Users.User
             {
-                UserName = TbNick.Text,
-                Session = new Standards_Final.Sessions.Session_Conn(TbSession.Text)
+                UserName = TbNick.Text
             };
+            anon.Current_Session.Session_ID = TbSession.Text;
 
-            Host_.Send_To_Server(tmp);
+            Host_.Send_To_Server(anon);
         }
         #endregion Buttons
+
         private void Connect(string Ip)
         {
             Host_ = new Host_Connection(Ip);
             Host_.Login_Res += Host__Login_Res;
             Host_.FromServer += Host__FromServer;
-            Host_.msgbox += Host__msgbox;
             Host_Connected();
-        }
-
-        private void Host__msgbox(Standards_Final.Network.Error error)
-        {
-            MessageBox.Show(error.Time_Of.TimeOfDay+":"+error.Message);
         }
 
         private void Host__FromServer(object package)
@@ -83,7 +84,8 @@ namespace Quiz_Client
         private void OpenHome()
         {
             this.Hide();
-            new Home().ShowDialog();
+            hom = new Home();
+            hom.ShowDialog();
             this.Show();
         }
 
@@ -116,8 +118,6 @@ namespace Quiz_Client
                     MessageBox.Show($"Hello {result.User.UserName}");
 
             }
-            else if (result.Temp != null)
-                Active_User.Active_User_Object = result.Temp;
             else
             {
                 MessageBox.Show("User not found!");

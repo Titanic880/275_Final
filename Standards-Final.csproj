@@ -44,12 +44,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Network\DisconnectUser.cs" />
-    <Compile Include="Network\Error.cs" />
     <Compile Include="Network\Login_Request.cs" />
     <Compile Include="Network\Login_Result.cs" />
     <Compile Include="Network\Register_Request.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Quizlet\Live_Question.cs" />
     <Compile Include="Quizlet\Question.cs" />
     <Compile Include="Quizlet\Quiz.cs" />
     <Compile Include="Sessions\Message.cs" />

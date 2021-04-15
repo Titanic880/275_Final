@@ -13,7 +13,17 @@ namespace Standards_Final.Quizlet
         [Key]
         public int Id { get; set; }
         public Question[] Qs {get; set; }
+        /// <summary>
+        /// True = public, false = private
+        /// </summary>
+        public bool Accessiblity { get; set; }
 
+        /// <summary>
+        /// List of users with access
+        /// </summary>
+        public List<Users.User> AccessUsers { get; set; }
+
+        public Users.User Creator { get; set; }
         public Quiz() { }
         public Quiz(Question[] questions)
         => Qs = questions;

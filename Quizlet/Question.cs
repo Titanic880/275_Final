@@ -22,10 +22,6 @@ namespace Standards_Final.Quizlet
 
         public DateTime Created_Question { get; set; }
         /// <summary>
-        /// True = public, false = private
-        /// </summary>
-        public bool Accessiblity { get; set; }
-        /// <summary>
         /// In Seconds
         /// </summary>
         public int Question_Time { get; set; }

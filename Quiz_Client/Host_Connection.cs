@@ -28,8 +28,11 @@ namespace Quiz_Client
         public event RecievedQuiz GetQuiz;
         public delegate void RecievedQuiz(Standards_Final.Quizlet.Quiz le_Quiz);
 
-        public event MBOX msgbox;
-        public delegate void MBOX(Error error);
+        public event RecievedQuestion QuestionGet;
+        public delegate void RecievedQuestion(Standards_Final.Quizlet.Question Q);
+
+        public event Session GetSession;
+        public delegate void Session(Session_Conn session);
         #endregion Delegates
 
         //User Stack
@@ -71,10 +74,10 @@ namespace Quiz_Client
                     Login_Res(LR);
                 else if (o is Standards_Final.Quizlet.Quiz Q)
                     GetQuiz(Q);
-                else if (o is Error err)
-                    msgbox(err);
                 else if (o is Session_Conn ses)
-                { }
+                    GetSession(ses);
+                else if (o is Standards_Final.Quizlet.Question q)
+                    QuestionGet(q);
                 else
                     FromServer(o);
             }
