@@ -59,6 +59,7 @@ namespace Server.Forms
             manager.UserDef += UserDef;
             manager.Start_Quiz += Manager_Start_Quiz;
             manager.scores += Manager_scores;
+            manager.pong += Manager_pong;
         }
 
         #region Delegates
@@ -169,6 +170,25 @@ namespace Server.Forms
                     a.SendMessage(_Update);
                 }
         }
+
+
+        private void Manager_pong(Client_Object client, Ping_Request ping)
+        {
+            Session_ ses = new Session_(ping.Session_ID);
+            foreach (Session_ a in lstSessions.Items)
+            {
+                if(a.Session_ID == ses.Session_ID)
+                {
+                    Ping_Result res = new Ping_Result
+                    {
+                        Does_Exist = true,
+                        Session_ID = a.Session_ID
+                    };
+                    client.SendMessage(res);
+                }
+            }
+        }
+
         #endregion Delegates
 
         private void RelayMessage(object message)

@@ -43,6 +43,9 @@ namespace Server
 
         public event Update_Score scores;
         public delegate void Update_Score(Score_Update _Update);
+
+        public event Ping pong;
+        public delegate void Ping(Client_Object client, Ping_Request ping);
         #endregion Delegates
 
         //Main worker
@@ -175,6 +178,9 @@ namespace Server
                     break;
                 case Score_Update _:
                     scores((Score_Update)Sort);
+                    break;
+                case Ping_Request _:
+                    pong(this, (Ping_Request)Sort);
                     break;
                 default:
                     break;

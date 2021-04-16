@@ -282,7 +282,7 @@ namespace Quiz_Client
                 //Builds and sends the request to see if the session exists
                 Ping_Request req = new Ping_Request
                 {
-                    Session_ID = LaunchForm.Host_.Active_User.Current_Session.Session_ID
+                    Session_ID = TbSession.Text
                 };
                 LaunchForm.Host_.Send_To_Server(req);
             }
