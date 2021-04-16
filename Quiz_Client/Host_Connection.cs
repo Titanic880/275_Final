@@ -17,12 +17,6 @@ namespace Quiz_Client
 
         #region Delegates
         /// <summary>
-        /// Recieves Generalized data from the server (Depreciated)
-        /// </summary>
-        public event RecievedFromServer FromServer;
-        public delegate void RecievedFromServer(object package);
-
-        /// <summary>
         /// Handles the Login Result
         /// </summary>
         public event ResultLogin Login_Res;
@@ -115,27 +109,25 @@ namespace Quiz_Client
                 //Pulls an item from the stream
                 object o = Stream.Deserialize(nStream);
 
-                //I WISH THIS COULD BE A SWITCH
-                switch (o)
-                {
-                    case string:
+                //I WISH THIS COULD BE A SWITCH (V9.0 (.net 5) isnt out yet however :( )
 
-                        break;
-                }
-                if (o is Login_Result LR)
-                    Login_Res(LR);
-                else if (o is Quiz[] Q)
-                    GetQuiz(Q);
-                else if (o is Session_Conn ses)
-                    GetSession(ses);
-                else if (o is User[] sess)
-                    GetList(sess);
-                else if (o is Question q)
-                    QuestionGet(q);
-                else if (o is Question[] qArr)
-                    GetQuestion(qArr);
-                else
-                    FromServer(o);
+                if (o is Login_Result)
+                    Login_Res((Login_Result)o);
+
+                else if (o is Session_Conn)
+                    GetSession((Session_Conn)o);
+
+                else if (o is Question[])
+                    GetQuestion((Question[])o);
+
+                else if (o is Quiz[])
+                    GetQuiz((Quiz[])o);
+
+                else if (o is User[])
+                    GetList((User[])o);
+
+                else if (o is Active_Question)
+                    QuestionGet((Active_Question)o);
             }
         }
 
@@ -145,6 +137,8 @@ namespace Quiz_Client
         /// <param name="package"></param>
         public void Send_To_Server(object package)
         {
+            //Checks if there might be a problem
+            //Depreciated?
             if (package == null || writer == null)
                 return;
 
