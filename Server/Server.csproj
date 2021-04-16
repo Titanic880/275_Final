@@ -195,6 +195,10 @@
     <Compile Include="Migrations\20210416042205_Scoring-User.designer.cs">
       <DependentUpon>20210416042205_Scoring-User.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20210416163106_AddedNewObjects.cs" />
+    <Compile Include="Migrations\20210416163106_AddedNewObjects.designer.cs">
+      <DependentUpon>20210416163106_AddedNewObjects.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Server_DbContextModelSnapshot.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

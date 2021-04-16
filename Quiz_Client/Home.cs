@@ -24,10 +24,10 @@ namespace Quiz_Client
         {
             InitializeComponent();
             //Ties into some Delegates
-            LaunchForm.Host_.GetSession += Host__GetSession;
             LaunchForm.Host_.GetList += Host_UserList;
             LaunchForm.Host_.GetQuiz += Host__GetQuiz;
             LaunchForm.Host_.QuestionGet += Host__QuestionGet;
+            LaunchForm.Host_.Result_Ping += Host__Result_Ping;
             //Sets up the basic timer
             TimeLeft.Interval = 100;
             TimeLeft.Tick += TimeLeft_Tick;
@@ -44,17 +44,6 @@ namespace Quiz_Client
         }
 
         #region Delegates
-        private void Host__GetSession(Session_Conn session)
-        {
-            BeginInvoke(new MethodInvoker(() => UpdateLabelSession("Session ID: " + session.Session_ID)));
-            LaunchForm.Host_.Active_User.Current_Session = session;
-        }
-        private void UpdateLabelSession(string txt)
-        {
-            lblSession.Text = txt;
-        }
-
-
         private void Host__GetQuiz(Quiz[] le_Quiz)
         {
             BeginInvoke(new MethodInvoker(() => UpdateQuizList(le_Quiz)));
@@ -89,6 +78,24 @@ namespace Quiz_Client
 
 
         }
+
+        private void Host__Result_Ping(Ping_Result result)
+        {
+            BeginInvoke(new MethodInvoker(() => Result_Ping_Method(result)));
+        }
+        private void Result_Ping_Method(Ping_Result result)
+        {
+            if (result.Does_Exist)
+            {
+                lblSession.Text = "Session ID: " + result.Session_ID;
+                LaunchForm.Host_.Active_User.Current_Session = result.ToSession();
+                UpdateGui();
+            }
+            else
+            {
+                MessageBox.Show("Session does not exist!");
+            }
+        }
         #endregion Delegates
         #region Events
         /// <summary>
@@ -97,12 +104,24 @@ namespace Quiz_Client
         /// <param name="Toggle"></param>
         private void UpdateGui(bool Toggle = false)
         {
-            BtnCreate.Enabled = Toggle;
-            BtnHost.Enabled = Toggle;
-            BtnSessionConnect.Enabled = Toggle;
-            BtnStart.Enabled = Toggle;
-            lstQuiz.Enabled = Toggle;
             TbSession.Enabled = Toggle;
+            BtnSessionConnect.Enabled = Toggle;
+           
+            //Checks if user is anon so certain Gui isnt actived after a quiz
+            if (LaunchForm.Host_.Active_User.Temp)
+            {
+                lstQuiz.Enabled = false;
+                BtnCreate.Enabled = false;
+                BtnHost.Enabled = false;
+                BtnStart.Enabled = false;
+            }
+            else
+            {
+                lstQuiz.Enabled = Toggle;
+                BtnCreate.Enabled = Toggle;
+                BtnHost.Enabled = Toggle;
+                BtnStart.Enabled = Toggle;
+            }
         }
 
         private void TimeLeft_Tick(object sender, EventArgs e)

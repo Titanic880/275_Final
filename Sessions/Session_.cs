@@ -7,7 +7,7 @@ namespace Standards_Final.Sessions
     /// Main Object of determining who/where to send Data such as Active_Questions
     /// </summary>
     [Serializable()]
-    public class Session_Conn
+    public class Session_
     {
         /// <summary>
         /// The String used to connect to the Session
@@ -21,11 +21,11 @@ namespace Standards_Final.Sessions
         public bool Is_Host { get; set; } = false;
 
         #region Constructors
-        public Session_Conn()
+        public Session_()
         {
 
         }
-        public Session_Conn(string ID)
+        public Session_(string ID)
         => Session_ID = ID;
 
         #endregion Constructors

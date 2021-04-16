@@ -55,7 +55,9 @@
     <Compile Include="Quizlet\Quiz.cs" />
     <Compile Include="Sessions\Active_Question.cs" />
     <Compile Include="Sessions\New_Session.cs" />
-    <Compile Include="Sessions\Session_Conn.cs" />
+    <Compile Include="Sessions\Ping_Result.cs" />
+    <Compile Include="Sessions\Session_.cs" />
+    <Compile Include="Sessions\Ping_Request.cs" />
     <Compile Include="Standards.cs" />
     <Compile Include="Users\User.cs" />
   </ItemGroup>

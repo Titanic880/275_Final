@@ -166,9 +166,9 @@ namespace Server
                     SendMessage(Server_DbLogic.Get_Questions());
                     break;
                 //???
-                case Session_Conn _:
+                case Session_ _:
                     {
-                        Session_Conn con = (Session_Conn)Sort;
+                        Session_ con = (Session_)Sort;
                         //Checks if the user is the host
                         if (!con.Is_Host) { }
                         break;

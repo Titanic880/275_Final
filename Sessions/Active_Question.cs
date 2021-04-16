@@ -11,7 +11,7 @@ namespace Standards_Final.Sessions
         /// <summary>
         /// What session to send the question to
         /// </summary>
-        public Session_Conn Session { get; set; }
+        public Session_ Session { get; set; }
         /// <summary>
         /// Who is sending/Who not to send the question to
         /// </summary>

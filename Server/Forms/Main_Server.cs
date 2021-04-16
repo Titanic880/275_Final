@@ -74,8 +74,8 @@ namespace Server.Forms
                 }
 
                 //Builds a session and compares it against all in list
-                Session_Conn Session = new Session_Conn(Session_ID);
-                foreach (Session_Conn con in lstSessions.Items)
+                Session_ Session = new Session_(Session_ID);
+                foreach (Session_ con in lstSessions.Items)
                 {
                     //Checks if the session already exists
                     if (con.Session_ID == Session.Session_ID)

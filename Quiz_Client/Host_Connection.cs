@@ -34,13 +34,6 @@ namespace Quiz_Client
         public delegate void RecievedQuestion(Active_Question Q);
 
         /// <summary>
-        /// Gets the Session from Server (Depreciated?)
-        /// </summary>
-        public event Session GetSession;
-        public delegate void Session(Session_Conn session);
-
-
-        /// <summary>
         /// Recieves a list of Quizzes for displaying
         /// </summary>
         public event RecievedQuiz GetQuiz;
@@ -57,6 +50,9 @@ namespace Quiz_Client
         /// </summary>
         public event GetUserConnList GetList;
         public delegate void GetUserConnList(User[] Connected);
+
+        public event PingRes Result_Ping;
+        public delegate void PingRes(Ping_Result result);
         #endregion Delegates
 
         //User Stack
@@ -122,9 +118,6 @@ namespace Quiz_Client
                     case Login_Result _:
                         Login_Res((Login_Result)o);
                         break;
-                    case Session_Conn _:
-                        GetSession((Session_Conn)o);
-                        break;
                     case Question[] _:
                         GetQuestion((Question[])o);
                         break;
@@ -136,6 +129,9 @@ namespace Quiz_Client
                         break;
                     case Active_Question _:
                         QuestionGet((Active_Question)o);
+                        break;
+                    case Ping_Result _:
+                        Result_Ping((Ping_Result)o);
                         break;
                 }
             }

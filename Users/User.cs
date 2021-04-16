@@ -43,7 +43,7 @@ namespace Standards_Final.Users
         /// <summary>
         /// What session they are currently Active in
         /// </summary>
-        public Sessions.Session_Conn Current_Session { get; set; }
+        public Sessions.Session_ Current_Session { get; set; }
 
         #region Constructors
         public User()
