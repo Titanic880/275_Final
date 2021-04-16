@@ -93,6 +93,7 @@ namespace Quiz_Client
             //Creates a new 
             Host_ = new Host_Connection(Ip);
             Host_.Login_Res += Host__Login_Res;
+            Host_.Connected += Connected;
         }
 
         private void OpenHome()
@@ -103,7 +104,12 @@ namespace Quiz_Client
         }
 
         #region Delegates
-        private void Host_Connected()
+        private void Connected()
+        {
+            BeginInvoke(new MethodInvoker(_Connected));
+        }
+
+        private void _Connected()
         {
             //User connection Stuff
             BtnLogin.Enabled = true;

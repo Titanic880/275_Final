@@ -23,6 +23,10 @@ namespace Quiz_Client
         public event ResultLogin Login_Res;
         public delegate void ResultLogin(Login_Result result);
 
+        //Runs when the user first connects
+        public event Connection Connected;
+        public delegate void Connection();
+
         /// <summary>
         /// Recieves the Active Question
         /// </summary>
@@ -96,6 +100,7 @@ namespace Quiz_Client
             //Creates the Stream to pull information from
             IFormatter Stream = new BinaryFormatter();
 
+            Connected();
             //MAIN LOOP
             while (!wkr.CancellationPending)
             {
@@ -105,7 +110,6 @@ namespace Quiz_Client
                     //Reconfigures the stream
                     nStream = tcpClient.GetStream();
                     writer = new BinaryWriter(nStream);
-                    //continue; // DEPRECIATED?
                 }
                 //Pulls an item from the stream
                 object o = Stream.Deserialize(nStream);
