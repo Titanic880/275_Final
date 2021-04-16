@@ -56,8 +56,10 @@
     <Compile Include="Sessions\Active_Question.cs" />
     <Compile Include="Sessions\New_Session.cs" />
     <Compile Include="Sessions\Ping_Result.cs" />
+    <Compile Include="Sessions\Quiz_Start.cs" />
     <Compile Include="Sessions\Session_.cs" />
     <Compile Include="Sessions\Ping_Request.cs" />
+    <Compile Include="Sessions\Session_End.cs" />
     <Compile Include="Standards.cs" />
     <Compile Include="Users\User.cs" />
   </ItemGroup>

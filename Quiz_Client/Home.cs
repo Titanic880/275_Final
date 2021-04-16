@@ -14,15 +14,13 @@ namespace Quiz_Client
         /// </summary>
         readonly Timer TimeLeft = new Timer();
 
-        private Question Prev;
-        /// <summary>
-        /// The Current Question
-        /// </summary>
-        private Question Active;
-
         public Home()
         {
             InitializeComponent();
+            //Personalization
+            this.Text = $"Home: {LaunchForm.Host_.Active_User.UserName}";
+
+
             //Ties into some Delegates
             LaunchForm.Host_.GetQuiz += Host__GetQuiz;
             LaunchForm.Host_.Result_Ping += Host__Result_Ping;
@@ -66,7 +64,7 @@ namespace Quiz_Client
             }
             else
             {
-                MessageBox.Show("Session does not exist!");
+                MessageBox.Show($"Session {result.Session_ID} does not exist!");
             }
         }
         #endregion Delegates
@@ -124,7 +122,7 @@ namespace Quiz_Client
             }
 
             //Reloads with a new Question
-            Quiz_Question = new QuizQuestion(Active);
+            Quiz_Question = new QuizQuestion(/*NEW QUESTION GOES HERE*/);
             Quiz_Question.Update();
             //Add Score update for others here?
         }
@@ -167,9 +165,6 @@ namespace Quiz_Client
                 //Checks for valid index
                 if (lstQuiz.SelectedIndex != -1)
                 {
-                    //Sets the quiz
-                    Quiz quiz = (Quiz)lstQuiz.SelectedItem;
-
                     //Creates the main Quiz object to be sent to server
                     Quiz_Start quiz_ = new Quiz_Start
                     {
@@ -187,18 +182,26 @@ namespace Quiz_Client
         }
         private void BtnSessionConnect_Click(object sender, EventArgs e)
         {
-            //Resets players Score
-            LaunchForm.Host_.Active_User.Current_Score = 0;
-            
-            //FIGURE OUT A WAY TO PING THE SERVER TO SEE IF THE SESSION EXISTS
-            //If it does then let the client know, and if it doesn't let the client know
-            //if it does then tie them to that given session
-            //And set them up into a 'Waiting for Quiz to begin' mode
-            
-            //Session_Conn session = new Session_Conn();
-            //session.Session_ID = TbSession.Text;
+            //Stops an error with empty Textbox
+            if (!string.IsNullOrWhiteSpace(TbSession.Text.Trim()))
+            {
+                //Resets players Score
+                LaunchForm.Host_.Active_User.Current_Score = 0;
 
+                //Builds and sends the request to see if the session exists
+                Ping_Request req = new Ping_Request
+                {
+                    Session_ID = LaunchForm.Host_.Active_User.Current_Session.Session_ID
+                };
+                LaunchForm.Host_.Send_To_Server(req);
+            }
+            else
+                MessageBox.Show("No session ID Found!");
 
+            ///FIGURE OUT A WAY TO PING THE SERVER TO SEE IF THE SESSION EXISTS
+            ///If it does then let the client know, and if it doesn't let the client know
+            ///if it does then tie them to that given session
+            ///And set them up into a 'Waiting for Quiz to begin' mode
         }
         #endregion Buttons
     }

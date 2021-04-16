@@ -23,7 +23,9 @@ namespace Quiz_Client
         public event ResultLogin Login_Res;
         public delegate void ResultLogin(Login_Result result);
 
-        //Runs when the user first connects
+        /// <summary>
+        /// Runs when the user first connects
+        /// </summary>
         public event Connection Connected;
         public delegate void Connection();
 
@@ -39,6 +41,9 @@ namespace Quiz_Client
         public event GetQuizQuest GetQuestion;
         public delegate void GetQuizQuest(Question[] Q);
 
+        /// <summary>
+        /// returns a bool and session ID
+        /// </summary>
         public event PingRes Result_Ping;
         public delegate void PingRes(Ping_Result result);
         #endregion Delegates
@@ -111,12 +116,6 @@ namespace Quiz_Client
                         break;
                     case Quiz[] _:
                         GetQuiz((Quiz[])o);
-                        break;
-                    case User[] _:
-                        GetList((User[])o);
-                        break;
-                    case Active_Question _:
-                        QuestionGet((Active_Question)o);
                         break;
                     case Ping_Result _:
                         Result_Ping((Ping_Result)o);

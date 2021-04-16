@@ -7,6 +7,7 @@ using System.Net;
 using System;
 
 using Standards_Final.Sessions;
+using Standards_Final.Network;
 
 namespace Server.Forms
 {
@@ -98,7 +99,10 @@ namespace Server.Forms
         /// <param name="client"></param>
         private void UserDef(Client_Object client)
         {
-            RelayMessage($"{client.User_Obj.UserName} has connected!");
+            if (!client.User_Obj.Temp)
+                RelayMessage($"{client.User_Obj.UserName} has connected!");
+            else
+                client.SendMessage(new Login_Result(client.User_Obj));
         }
 
         private void NewClientConnected(Client_Object client)

@@ -71,17 +71,19 @@ namespace Quiz_Client
         /// <param name="e"></param>
         private void BtnAnon_Click(object sender, EventArgs e)
         {
-            //Creates a user and passes it to the server
-            Standards_Final.Users.User anon = new Standards_Final.Users.User
+            //Doesn't allow a blank ID
+            if (!string.IsNullOrWhiteSpace(TbNick.Text.Trim()))
             {
-                UserName = TbNick.Text
-            };
-
-            anon.Temp = true;
-
-            Host_.Send_To_Server(anon);
-            //OPEN HOME HERE (With restrictions)
-            //new Home().ShowDialog();
+                //Creates a user and passes it to the server
+                Standards_Final.Users.User anon = new Standards_Final.Users.User
+                {
+                    UserName = TbNick.Text,
+                    Temp = true
+                };
+                Host_.Send_To_Server(anon);
+            }
+            else
+                MessageBox.Show("Please enter a nick name or login!");
         }
         #endregion Buttons
         /// <summary>
@@ -131,7 +133,8 @@ namespace Quiz_Client
             {
                 //Sets the Client User
                 Host_.Active_User = result.User;
-                Host_.Send_To_Server(result.User);
+                if(!result.User.Temp)
+                    Host_.Send_To_Server(result.User);
                 //Checks if the person is a new user
                 if (result.New_User)
                     MessageBox.Show($"Hello and welcome to kahoot.Clone {result.User.UserName}");
