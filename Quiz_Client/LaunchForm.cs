@@ -107,9 +107,9 @@ namespace Quiz_Client
         private void Connected()
         {
             //Makes main thread deal with the work :D
-            BeginInvoke(new MethodInvoker(_Connected));
+            BeginInvoke(new MethodInvoker(C_Connected));
         }
-        private void _Connected()
+        private void C_Connected()
         {
             //User connection Stuff
             BtnLogin.Enabled = true;

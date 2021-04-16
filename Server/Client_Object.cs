@@ -1,18 +1,15 @@
 ﻿using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
-using System.Collections.Generic;
+using System.ComponentModel;
+using System.Net.Sockets;
+using System.IO;
+
 using Standards_Final.Sessions;
 using Standards_Final.Network;
-using System.Threading.Tasks;
-using Standards_Final.Users;
-using System.ComponentModel;
-using Server.Framework_Ent;
-using System.Net.Sockets;
-using System.Text;
-using System.Linq;
-using System.IO;
-using System;
 using Standards_Final.Quizlet;
+using Standards_Final.Users;
+
+using Server.Framework_Ent;
 
 namespace Server
 {
@@ -54,9 +51,13 @@ namespace Server
 
         public Client_Object(TcpListener listener)
         {
+            //Resets the listener
             Client_Listener = listener;
+            
+            //Increases ID Counter
             ClientCounter++;
-
+            
+            //Sets up the worker
             wkr.WorkerReportsProgress = true;
             wkr.DoWork += Incoming;
             wkr.ProgressChanged += Sorting;
@@ -65,6 +66,11 @@ namespace Server
             wkr.RunWorkerAsync();
         }
 
+        /// <summary>
+        /// Incoming Data
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Incoming (object sender, DoWorkEventArgs e)
         {
             //Makes sure the socket is connected
@@ -96,82 +102,72 @@ namespace Server
                 object o = formatter.Deserialize(C_reader.BaseStream);
                 if (o is null)
                     continue;
-                
-                else if (o is DisconnectUser DisU)
-                    wkr.ReportProgress(1, DisU);
-                
-                else if (o is User U)
-                    wkr.ReportProgress(2, U);
-                
-                else if (o is Register_Request ResReq)
-                    wkr.ReportProgress(3, ResReq);
-                
-                else if (o is Login_Request LReq)
-                    wkr.ReportProgress(4, LReq);
-                
-                else if (o is New_Session NSes)
-                    wkr.ReportProgress(6, NSes);
-                
-                else if (o is NewQuestion || o is NewQuiz)
-                    wkr.ReportProgress(7, o);
-                
-                else if (o is Request<Quiz[]>)
-                    wkr.ReportProgress(8, o);
-                
-                else if (o is Request<Question[]>)
-                    wkr.ReportProgress(9, o);
-                
-                else if (o is Session_Conn)
-                    wkr.ReportProgress(10, o);
+                else //Instead of double sorting i sort it once
+                    wkr.ReportProgress(1, o);
             }
         }
 
         private void Sorting(object sender, ProgressChangedEventArgs e)
         {
-            switch (e.ProgressPercentage)
+            //New Client Connected
+            if (e.ProgressPercentage == 0)
             {
-                case 0: //User connect
-                    NewClientConnected(this);
-                    break;
-                case 1: //User Disconnect
+                NewClientConnected(this);
+                return;
+            }
+
+            object Sort = e.UserState;
+
+            //Disconnects the Client
+            switch (Sort)
+            {
+                //Disconnects the user
+                case DisconnectUser _:
                     ClientDisconnected(this);
                     break;
-                case 2:
-                    this.User_Obj = (User)e.UserState;
+                //Ties a Client_Object & Client to a User
+                case User _:
+                    User_Obj = (User)Sort;
                     UserDef(this);
                     break;
-                case 3: //Register Request
-                    SendMessage(Server_DbLogic.Client_Register((Register_Request)e.UserState));
+                //User requesting to register with provided credentials
+                case Register_Request _:
+                    SendMessage(Server_DbLogic.Client_Register((Register_Request)Sort));
                     break;
-                case 4: //Login Request
-                    SendMessage(Server_DbLogic.Client_Login((Login_Request)e.UserState));
+                //Client Asking server to check DB for User object
+                case Login_Request _:
+                    SendMessage(Server_DbLogic.Client_Login((Login_Request)Sort));
                     break;
-                case 5: //Temp User Connecting to session
+                //Creates a new Session
+                case New_Session _:
+                    Sess_New(this, (New_Session)Sort);
                     break;
-                case 6: //Request for a new session 
-                    Sess_New(this, (New_Session)e.UserState);
+                //Adds a new Question to the DB
+                case NewQuestion _:
+                    Server_DbLogic.Add_Question(((NewQuestion)e.UserState).NewQ);
                     break;
-                case 7:
-                    if (e.UserState is NewQuestion)
-                        Server_DbLogic.Add_Question(((NewQuestion)e.UserState).NewQ);
-                    else if (e.UserState is NewQuiz)
-                        Server_DbLogic.Add_Quiz(((NewQuiz)e.UserState).newQ);
+                //Adds a new Quiz to the Db
+                case NewQuiz _:
+                    Server_DbLogic.Add_Quiz(((NewQuiz)e.UserState).newQ);
                     break;
-                case 8:
-                    this.SendMessage(Server_DbLogic.Get_Quiz(this.User_Obj));
+                //Recieves a list of all accessible quizzes
+                case Quiz[] _:
+                    SendMessage(Server_DbLogic.Get_Quiz(User_Obj));
                     break;
-                case 9:
-                    this.SendMessage(Server_DbLogic.Get_Questions());
+                //Recieves a list of all questions
+                case Question[] _:
+                    SendMessage(Server_DbLogic.Get_Questions());
                     break;
-                case 10: //Session_Conn
-                    Session_Conn con = (Session_Conn)e.UserState;
-                    //Checks if the user is the host
-                    if (!con.Is_Host)
+                //???
+                case Session_Conn _:
                     {
-
+                        Session_Conn con = (Session_Conn)Sort;
+                        //Checks if the user is the host
+                        if (!con.Is_Host) { }
+                        break;
                     }
-                    break;
             }
+
         }
 
         public void SendMessage(object Msg)

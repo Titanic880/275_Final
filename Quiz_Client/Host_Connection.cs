@@ -114,27 +114,30 @@ namespace Quiz_Client
                 //Pulls an item from the stream
                 object o = Stream.Deserialize(nStream);
 
-                //I WISH THIS COULD BE A SWITCH (V9.0 (.net 5) isnt out yet however :( )
+                //I WISH THIS COULD BE A SWITCH (EDIT:: INTELLISENSE SAID IT CAN BE DONE~!~!)
+                //Pls Teach this Wizardry to people, it makes switches a good idea
 
-#pragma warning disable IDE0038 // Use pattern matching (Was easier to read without pattern matching)
-                if (o is Login_Result)
-                    Login_Res((Login_Result)o);
-
-                else if (o is Session_Conn)
-                    GetSession((Session_Conn)o);
-
-                else if (o is Question[])
-                    GetQuestion((Question[])o);
-
-                else if (o is Quiz[])
-                    GetQuiz((Quiz[])o);
-
-                else if (o is User[])
-                    GetList((User[])o);
-
-                else if (o is Active_Question)
-                    QuestionGet((Active_Question)o);
-#pragma warning restore IDE0038 // Use pattern matching
+                switch (o)
+                {
+                    case Login_Result _:
+                        Login_Res((Login_Result)o);
+                        break;
+                    case Session_Conn _:
+                        GetSession((Session_Conn)o);
+                        break;
+                    case Question[] _:
+                        GetQuestion((Question[])o);
+                        break;
+                    case Quiz[] _:
+                        GetQuiz((Quiz[])o);
+                        break;
+                    case User[] _:
+                        GetList((User[])o);
+                        break;
+                    case Active_Question _:
+                        QuestionGet((Active_Question)o);
+                        break;
+                }
             }
         }
 
