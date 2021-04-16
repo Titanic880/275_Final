@@ -138,7 +138,7 @@ namespace Quiz_Client
             this.lstQuiz.FormattingEnabled = true;
             this.lstQuiz.Location = new System.Drawing.Point(12, 239);
             this.lstQuiz.Name = "lstQuiz";
-            this.lstQuiz.Size = new System.Drawing.Size(120, 199);
+            this.lstQuiz.Size = new System.Drawing.Size(120, 173);
             this.lstQuiz.TabIndex = 19;
             // 
             // label2
@@ -152,7 +152,7 @@ namespace Quiz_Client
             // 
             // BtnStart
             // 
-            this.BtnStart.Location = new System.Drawing.Point(138, 415);
+            this.BtnStart.Location = new System.Drawing.Point(12, 415);
             this.BtnStart.Name = "BtnStart";
             this.BtnStart.Size = new System.Drawing.Size(120, 23);
             this.BtnStart.TabIndex = 21;
@@ -165,7 +165,7 @@ namespace Quiz_Client
             this.lstUsers.FormattingEnabled = true;
             this.lstUsers.Location = new System.Drawing.Point(138, 239);
             this.lstUsers.Name = "lstUsers";
-            this.lstUsers.Size = new System.Drawing.Size(120, 173);
+            this.lstUsers.Size = new System.Drawing.Size(120, 199);
             this.lstUsers.TabIndex = 22;
             // 
             // label3

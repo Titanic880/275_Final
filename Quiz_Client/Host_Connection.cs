@@ -28,12 +28,6 @@ namespace Quiz_Client
         public delegate void Connection();
 
         /// <summary>
-        /// Recieves the Active Question
-        /// </summary>
-        public event RecievedQuestion QuestionGet;
-        public delegate void RecievedQuestion(Active_Question Q);
-
-        /// <summary>
         /// Recieves a list of Quizzes for displaying
         /// </summary>
         public event RecievedQuiz GetQuiz;
@@ -44,12 +38,6 @@ namespace Quiz_Client
         /// </summary>
         public event GetQuizQuest GetQuestion;
         public delegate void GetQuizQuest(Question[] Q);
-
-        /// <summary>
-        /// Recieves a list of users for Displaying
-        /// </summary>
-        public event GetUserConnList GetList;
-        public delegate void GetUserConnList(User[] Connected);
 
         public event PingRes Result_Ping;
         public delegate void PingRes(Ping_Result result);
@@ -132,6 +120,9 @@ namespace Quiz_Client
                         break;
                     case Ping_Result _:
                         Result_Ping((Ping_Result)o);
+                        break;
+                    case Quiz_Start _:
+
                         break;
                 }
             }

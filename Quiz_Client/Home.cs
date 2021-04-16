@@ -24,9 +24,7 @@ namespace Quiz_Client
         {
             InitializeComponent();
             //Ties into some Delegates
-            LaunchForm.Host_.GetList += Host_UserList;
             LaunchForm.Host_.GetQuiz += Host__GetQuiz;
-            LaunchForm.Host_.QuestionGet += Host__QuestionGet;
             LaunchForm.Host_.Result_Ping += Host__Result_Ping;
             //Sets up the basic timer
             TimeLeft.Interval = 100;
@@ -52,31 +50,6 @@ namespace Quiz_Client
         {
             lstQuiz.AccessibleName = "Id";
             lstQuiz.DataSource = quizzes;
-        }
-
-
-        private void Host_UserList(User[] Connected)
-        {
-            BeginInvoke(new MethodInvoker(() => UpdateUserList(Connected)));
-        }
-        private void UpdateUserList(User[] users)
-        {
-            lstUsers.AccessibleName = "UserName";
-            lstUsers.DataSource = users;
-        }
-
-
-        private void Host__QuestionGet(Active_Question Q)
-        {
-            BeginInvoke(new MethodInvoker(() => QuestionGet(Q)));
-        }
-        private void QuestionGet(Active_Question Q)
-        {
-            //Shifts the Question down
-            Prev = Active;
-            Active = Q;
-
-
         }
 
         private void Host__Result_Ping(Ping_Result result)
@@ -188,15 +161,29 @@ namespace Quiz_Client
 
         private void BtnStart_Click(object sender, EventArgs e)
         {
-            if(lstQuiz.SelectedIndex != -1)
+            //Checks for current session
+            if (LaunchForm.Host_.Active_User.Current_Session.Is_Host)
             {
-                Quiz quiz = (Quiz)lstQuiz.SelectedItem;
+                //Checks for valid index
+                if (lstQuiz.SelectedIndex != -1)
+                {
+                    //Sets the quiz
+                    Quiz quiz = (Quiz)lstQuiz.SelectedItem;
 
-                //Create a new QuestionGet object and send that to let the server bounce the question
-                LaunchForm.Host_.Send_To_Server(quiz);
+                    //Creates the main Quiz object to be sent to server
+                    Quiz_Start quiz_ = new Quiz_Start
+                    {
+                        Active_Session = LaunchForm.Host_.Active_User.Current_Session,
+                        Host = LaunchForm.Host_.Active_User,
+                        The_Quiz = (Quiz)lstQuiz.SelectedItem
+                    };
+
+                    //Sends it to the server
+                    LaunchForm.Host_.Send_To_Server(quiz_);
+                }
+                else
+                    MessageBox.Show("Invalid Quiz!");
             }
-            else
-                MessageBox.Show("Invalid Quiz!");
         }
         private void BtnSessionConnect_Click(object sender, EventArgs e)
         {
