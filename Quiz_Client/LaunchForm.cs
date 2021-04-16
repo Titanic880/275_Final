@@ -1,5 +1,4 @@
-﻿using Standards_Final.Sessions;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using Standards_Final;
 using System.Data;
 using System.Linq;
@@ -82,6 +81,7 @@ namespace Quiz_Client
 
             Host_.Send_To_Server(anon);
             //OPEN HOME HERE (With restrictions)
+            //new Home().ShowDialog();
         }
         #endregion Buttons
         /// <summary>
@@ -106,9 +106,9 @@ namespace Quiz_Client
         #region Delegates
         private void Connected()
         {
+            //Makes main thread deal with the work :D
             BeginInvoke(new MethodInvoker(_Connected));
         }
-
         private void _Connected()
         {
             //User connection Stuff

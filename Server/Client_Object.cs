@@ -96,22 +96,31 @@ namespace Server
                 object o = formatter.Deserialize(C_reader.BaseStream);
                 if (o is null)
                     continue;
+                
                 else if (o is DisconnectUser DisU)
                     wkr.ReportProgress(1, DisU);
+                
                 else if (o is User U)
                     wkr.ReportProgress(2, U);
+                
                 else if (o is Register_Request ResReq)
                     wkr.ReportProgress(3, ResReq);
+                
                 else if (o is Login_Request LReq)
                     wkr.ReportProgress(4, LReq);
+                
                 else if (o is New_Session NSes)
                     wkr.ReportProgress(6, NSes);
+                
                 else if (o is NewQuestion || o is NewQuiz)
                     wkr.ReportProgress(7, o);
+                
                 else if (o is Request<Quiz[]>)
                     wkr.ReportProgress(8, o);
+                
                 else if (o is Request<Question[]>)
                     wkr.ReportProgress(9, o);
+                
                 else if (o is Session_Conn)
                     wkr.ReportProgress(10, o);
             }

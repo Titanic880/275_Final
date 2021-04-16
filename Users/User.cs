@@ -30,6 +30,8 @@ namespace Standards_Final.Users
         /// if the user is anon or not
         /// </summary>
         public bool Temp { get; set; }
+
+        public int Current_Score { get; set; }
         /// <summary>
         /// What session they are currently Active in
         /// </summary>

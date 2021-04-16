@@ -40,7 +40,7 @@ namespace Standards_Final.Quizlet
         public int Creator_ID { get; set; }
 
         public Quiz() { }
-        
+       
         /*
         public void SetQuestions(Question[] Q)
         {
