@@ -132,6 +132,16 @@ namespace Server.Framework_Ent
             }
             return arr;
         }
+
+        public static Question Get_Specific_Question(int Id)
+        {
+            Question ret = null;
+            using (Server_DbContext db = new Server_DbContext())
+            {
+                ret = db.Db_Questions.Where(x => x.Id == Id).FirstOrDefault();
+            }
+            return ret;
+        }
         #endregion Questions
         #region Quiz
         public static void Add_Quiz(Quiz quiz)

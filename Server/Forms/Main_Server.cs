@@ -8,6 +8,10 @@ using System;
 
 using Standards_Final.Sessions;
 using Standards_Final.Network;
+using Standards_Final.Quizlet;
+
+using Server.Framework_Ent;
+using Standards_Final.Users;
 
 namespace Server.Forms
 {
@@ -51,10 +55,35 @@ namespace Server.Forms
             manager = new Client_Object(tcpListener);
             manager.NewClientConnected += NewClientConnected;
             manager.ClientDisconnected += ClientDisconnected;
-            manager.UserDef += UserDef;
             manager.Sess_New += NewSession;
+            manager.UserDef += UserDef;
+            manager.Start_Quiz += Manager_Start_Quiz;
         }
-
+        #region Delegates
+        private void NewClientConnected(Client_Object client)
+        {
+            Clients.Add(client);
+            lstError.Items.Add($"{Clients.Count-1} has connected");
+            NewClient();
+        }
+        
+        private void ClientDisconnected(Client_Object client)
+        {
+            //Checks to see if a user was assigned to a client
+            string msg;
+            if (client.User_Obj == null)
+                msg = "A client has disconnected";
+            else
+                msg = $"{client.User_Obj.UserName} has disconnected";
+            
+            //Attempts to remove the client from the list of clients
+            if (Clients.Remove(client))
+            {
+                    lstError.Items.Add(msg);
+               Client_Object.ClientCounter--;
+            }
+        }
+        
         private void NewSession(Client_Object client, New_Session new_)
         {
             //DEPRECIATED?
@@ -92,7 +121,7 @@ namespace Server.Forms
                 client.SendMessage(Session);
             }
         }
-
+        
         /// <summary>
         /// Runs when a client logs in with a User
         /// </summary>
@@ -105,30 +134,33 @@ namespace Server.Forms
                 client.SendMessage(new Login_Result(client.User_Obj));
         }
 
-        private void NewClientConnected(Client_Object client)
+        private void Manager_Start_Quiz(Quiz_Start _Start)
         {
-            Clients.Add(client);
-            lstError.Items.Add($"{Clients.Count-1} has connected");
-            NewClient();
+            //Gets the Array of questions
+            string[] Str_Ids = _Start.The_Quiz.Questions_Str.Split(',');
+            Question[] questions = new Question[Str_Ids.Length];
+            for (int i = 0; i < Str_Ids.Length - 1; i++)
+                if (int.TryParse(Str_Ids[i], out int ID))
+                    questions[i] = Server_DbLogic.Get_Specific_Question(ID);
+                else
+                    lstUMessage.Items.Add($"Session {_Start.Active_Session.Session_ID} Tried to access non existent Question with ID {Str_Ids[i]}");
+
+            List<User> users = new List<User>();
+            //Loads the users that are in the session
+            foreach (Client_Object a in Clients)
+                if (a.User_Obj.Current_Session == _Start.Active_Session)
+                    users.Add(a.User_Obj);
+
+            _Start.Participatants = users.ToArray();
+
+            //Sends the final session to the users
+            foreach (Client_Object a in Clients)
+                if (a.User_Obj.Current_Session == _Start.Active_Session)
+                    a.SendMessage(_Start);
         }
 
-        private void ClientDisconnected(Client_Object client)
-        {
-            //Checks to see if a user was assigned to a client
-            string msg;
-            if (client.User_Obj == null)
-                msg = "A client has disconnected";
-            else
-                msg = $"{client.User_Obj.UserName} has disconnected";
-            
-            //Attempts to remove the client from the list of clients
-            if (Clients.Remove(client))
-            {
-                    lstError.Items.Add(msg);
-               Client_Object.ClientCounter--;
-            }
-        }
-
+        #endregion Delegates
+        
         private void RelayMessage(object message)
         {
             //Loops through each User

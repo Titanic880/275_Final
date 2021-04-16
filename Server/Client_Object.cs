@@ -37,6 +37,9 @@ namespace Server
         //Runs when a client requests a new session
         public event NewSession Sess_New;
         public delegate void NewSession(Client_Object client, New_Session new_);
+
+        public event StartQuiz Start_Quiz;
+        public delegate void StartQuiz(Quiz_Start _Start);
         #endregion Delegates
 
         //Main worker
@@ -122,10 +125,9 @@ namespace Server
                 NewClientConnected(this);
                 return;
             }
-
+            //Changes the object into a easier to read format
             object Sort = e.UserState;
 
-            //Disconnects the Client
             switch (Sort)
             {
                 //Disconnects the user
@@ -165,14 +167,12 @@ namespace Server
                 case Question[] _:
                     SendMessage(Server_DbLogic.Get_Questions());
                     break;
-                //???
-                case Session_ _:
-                    {
-                        Session_ con = (Session_)Sort;
-                        //Checks if the user is the host
-                        if (!con.Is_Host) { }
-                        break;
-                    }
+                case Quiz_Start _:
+                    Start_Quiz((Quiz_Start) Sort);
+                    break;
+
+                default:
+                    break;
             }
 
         }
