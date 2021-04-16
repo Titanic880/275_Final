@@ -130,9 +130,7 @@ namespace Server.Forms
         /// <param name="client"></param>
         private void UserDef(Client_Object client)
         {
-            if (!client.User_Obj.Temp)
-                RelayMessage($"{client.User_Obj.UserName} has connected!");
-            else
+            if (client.User_Obj.Temp)
                 client.SendMessage(new Login_Result(client.User_Obj));
         }
 

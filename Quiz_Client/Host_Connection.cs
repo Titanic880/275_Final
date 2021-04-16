@@ -142,7 +142,7 @@ namespace Quiz_Client
                         S_Update((Score_Update)o);
                         break;
                     case Session_ _:
-
+                        Ses_Get((Session_)o);
                         break;
                     default:
                         break;

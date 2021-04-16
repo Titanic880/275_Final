@@ -109,7 +109,8 @@ namespace Quiz_Client
 
         private void Ses_Get(Session_ session)
         {
-            LaunchForm.Host_.Active_User.Current_Session = session;\
+            lblSession.Text = "Session ID: " + session.Session_ID;
+            LaunchForm.Host_.Active_User.Current_Session = session;
             UpdateGui();
         }
         #endregion Delegates
