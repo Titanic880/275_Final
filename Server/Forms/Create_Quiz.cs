@@ -93,13 +93,13 @@ namespace Server.Forms
             {
                 tmp.Add(quest);
             }
-            quiz.Qs = tmp.ToArray();
+            //quiz.Qs = tmp.ToArray();
 
             DialogResult dia = MessageBox.Show("Is this public?","Public?",MessageBoxButtons.YesNo);
 
             if (dia == DialogResult.Yes)
                 quiz.Accessiblity = true;
-            quiz.AccessUsers.Add(quiz.Creator);
+            quiz.AccessUsers += quiz.Creator_ID+",";
             
             //NEEDS TO BE FINISHED
         }

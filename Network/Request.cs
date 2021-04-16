@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Standards_Final.Network
 {
+    /// <summary>
+    /// Sends a Blank Request to the server, with the object type being the seperator
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     [Serializable]
     public class Request<T>
     {

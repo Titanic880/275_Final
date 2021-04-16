@@ -13,8 +13,14 @@ namespace Standards_Final.Sessions
     /// </summary>
     public class New_Session
     {
+        /// <summary>
+        /// Who requested a new Session
+        /// </summary>
         public User Host { get; set; }
-        public Session_Conn Session_ID { get; set; }
+
+        /// <summary>
+        /// Whether or not the session can be found within a list of public sessions (:: UNIMPLEMENTED ::)
+        /// </summary>
         public bool Is_Public { get; set; } = false;
     }
 }

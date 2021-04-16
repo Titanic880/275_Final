@@ -111,7 +111,9 @@ namespace Server
                 else if (o is Request<Quiz[]>)
                     wkr.ReportProgress(8, o);
                 else if (o is Request<Question[]>)
-                    wkr.ReportProgress(9,o);
+                    wkr.ReportProgress(9, o);
+                else if (o is Session_Conn)
+                    wkr.ReportProgress(10, o);
             }
         }
 
@@ -151,6 +153,14 @@ namespace Server
                     break;
                 case 9:
                     this.SendMessage(Server_DbLogic.Get_Questions());
+                    break;
+                case 10: //Session_Conn
+                    Session_Conn con = (Session_Conn)e.UserState;
+                    //Checks if the user is the host
+                    if (!con.Is_Host)
+                    {
+
+                    }
                     break;
             }
         }

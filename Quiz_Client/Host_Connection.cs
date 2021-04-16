@@ -11,6 +11,7 @@ using System;
 using Standards_Final.Network;
 using Standards_Final.Sessions;
 using Standards_Final.Quizlet;
+using Standards_Final.Users;
 
 namespace Quiz_Client
 {
@@ -27,16 +28,19 @@ namespace Quiz_Client
         public delegate void ResultLogin(Login_Result result);
 
         public event RecievedQuiz GetQuiz;
-        public delegate void RecievedQuiz(Standards_Final.Quizlet.Quiz le_Quiz);
+        public delegate void RecievedQuiz(Quiz[] le_Quiz);
 
         public event RecievedQuestion QuestionGet;
-        public delegate void RecievedQuestion(Standards_Final.Quizlet.Question Q);
+        public delegate void RecievedQuestion(Question Q);
 
         public event Session GetSession;
         public delegate void Session(Session_Conn session);
 
         public event GetQuizQuest GetQuestion;
         public delegate void GetQuizQuest(Question[] Q);
+
+        public event GetUserConnList GetList;
+        public delegate void GetUserConnList(User[] Connected);
         #endregion Delegates
 
         //User Stack
@@ -76,10 +80,12 @@ namespace Quiz_Client
 
                 if (o is Login_Result LR)
                     Login_Res(LR);
-                else if (o is Quiz Q)
+                else if (o is Quiz[] Q)
                     GetQuiz(Q);
                 else if (o is Session_Conn ses)
                     GetSession(ses);
+                else if (o is User[] sess)
+                    GetList(sess);
                 else if (o is Question q)
                     QuestionGet(q);
                 else if (o is Question[] qArr)

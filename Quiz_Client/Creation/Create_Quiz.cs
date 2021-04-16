@@ -99,21 +99,21 @@ namespace Quiz_Client.Creation
         private void BtnFinish_Click(object sender, EventArgs e)
         {
             Quiz quiz = new Quiz();
-            List<Question> tmp = new List<Question>();
+            string tmp = null;
             foreach (Question quest in lstQuiz.Items)
             {
-                tmp.Add(quest);
+                tmp += quest.Id+",";
             }
-            quiz.Qs = tmp.ToArray();
-
+            tmp = tmp.TrimEnd(',');
+            quiz.Questions_Str = tmp;
             DialogResult dia = MessageBox.Show("Is this public?", "Public?", MessageBoxButtons.YesNo);
 
             if (dia == DialogResult.Yes)
                 quiz.Accessiblity = true;
-            quiz.Creator = Active_User.Active_User_Object;
-            quiz.AccessUsers.Add(quiz.Creator);
+            quiz.Creator_ID = Active_User.Active_User_Object.Id;
+            quiz.AccessUsers += quiz.Creator_ID+ ",";
 
-            LaunchForm.Host_.Send_To_Server(new NewQuiz(quiz));   
+            LaunchForm.Host_.Send_To_Server(new NewQuiz(quiz));
         }
     }
 }

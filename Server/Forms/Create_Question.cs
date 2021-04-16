@@ -52,7 +52,7 @@ namespace Server.Forms
                     if (int.TryParse(TbQ.Text, out int res))
                         Timer = res;
 
-                    Q = new Question(Framework_Ent.Server_DbLogic.Host_Client,
+                    Q = new Question(Framework_Ent.Server_DbLogic.Host_Client.Id,
                                      TbQ.Text,
                                      Answers.ToArray(),
                                      C_Answers.ToArray(),

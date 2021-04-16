@@ -7,14 +7,23 @@ using System.Threading.Tasks;
 
 namespace Standards_Final.Quizlet
 {
+    /// <summary>
+    /// Collection of Questions
+    /// </summary>
     [Serializable()]
     public class Quiz
     {
+        /// <summary>
+        /// MAIN DB ID
+        /// </summary>
         [Key]
         public int Id { get; set; }
-        public Question[] Qs {get; set; }
 
-        private string Questions_Str { get; set; }
+        /// <summary>
+        /// List of Question Id's
+        /// </summary>
+        public string Questions_Str { get; set; }
+
         /// <summary>
         /// True = public, false = private
         /// </summary>
@@ -23,14 +32,16 @@ namespace Standards_Final.Quizlet
         /// <summary>
         /// List of users with access
         /// </summary>
-        public List<Users.User> AccessUsers { get; set; } = new List<Users.User>();
+        public string AccessUsers { get; set; }
 
-        public Users.User Creator { get; set; }
+        /// <summary>
+        /// User.Id of the creator
+        /// </summary>
+        public int Creator_ID { get; set; }
+
         public Quiz() { }
-        public Quiz(Question[] questions)
-        => Qs = questions;
-     
         
+        /*
         public void SetQuestions(Question[] Q)
         {
             string newQs = null;
@@ -44,7 +55,7 @@ namespace Standards_Final.Quizlet
                 //Adds onto the end ready for next Question
                 newQs += "\\";
             }
-            newQs.TrimEnd('\\');
+            newQs = newQs.TrimEnd('\\');
             Questions_Str = newQs;
         }
         public Question[] GetQuestions()
@@ -71,6 +82,6 @@ namespace Standards_Final.Quizlet
             }
 
             return qs.ToArray();
-        }
+        }*/
     }
 }

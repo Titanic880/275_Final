@@ -155,7 +155,7 @@ namespace Server.Framework_Ent
                     arr = db.Db_Quizzes.Where(x => x.Accessiblity == true).ToArray();
                 else
                     arr = db.Db_Quizzes.Where(x => x.Accessiblity == true 
-                                            ||x.AccessUsers.Contains(user)).ToArray();
+                                            ||x.AccessUsers.Contains(user.Id+",")).ToArray();
             }
             return arr;
         }

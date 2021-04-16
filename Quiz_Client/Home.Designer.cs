@@ -39,6 +39,11 @@ namespace Quiz_Client
             this.TbSession = new System.Windows.Forms.TextBox();
             this.Quiz_Question = new Quiz_Client.QuizQuestion();
             this.BtnCreate = new System.Windows.Forms.Button();
+            this.lstQuiz = new System.Windows.Forms.ListBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.BtnStart = new System.Windows.Forms.Button();
+            this.lstUsers = new System.Windows.Forms.ListBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // BtnHost
@@ -128,11 +133,60 @@ namespace Quiz_Client
             this.BtnCreate.UseVisualStyleBackColor = true;
             this.BtnCreate.Click += new System.EventHandler(this.BtnCreate_Click);
             // 
+            // lstQuiz
+            // 
+            this.lstQuiz.FormattingEnabled = true;
+            this.lstQuiz.Location = new System.Drawing.Point(12, 239);
+            this.lstQuiz.Name = "lstQuiz";
+            this.lstQuiz.Size = new System.Drawing.Size(120, 199);
+            this.lstQuiz.TabIndex = 19;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 223);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(79, 13);
+            this.label2.TabIndex = 20;
+            this.label2.Text = "Avaliable Tests";
+            // 
+            // BtnStart
+            // 
+            this.BtnStart.Location = new System.Drawing.Point(138, 415);
+            this.BtnStart.Name = "BtnStart";
+            this.BtnStart.Size = new System.Drawing.Size(120, 23);
+            this.BtnStart.TabIndex = 21;
+            this.BtnStart.Text = "Start!";
+            this.BtnStart.UseVisualStyleBackColor = true;
+            this.BtnStart.Click += new System.EventHandler(this.BtnStart_Click);
+            // 
+            // lstUsers
+            // 
+            this.lstUsers.FormattingEnabled = true;
+            this.lstUsers.Location = new System.Drawing.Point(138, 239);
+            this.lstUsers.Name = "lstUsers";
+            this.lstUsers.Size = new System.Drawing.Size(120, 173);
+            this.lstUsers.TabIndex = 22;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(135, 223);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(89, 13);
+            this.label3.TabIndex = 23;
+            this.label3.Text = "Connected Users";
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lstUsers);
+            this.Controls.Add(this.BtnStart);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lstQuiz);
             this.Controls.Add(this.BtnCreate);
             this.Controls.Add(this.Quiz_Question);
             this.Controls.Add(this.BtnHost);
@@ -162,5 +216,10 @@ namespace Quiz_Client
         private System.Windows.Forms.TextBox TbSession;
         private QuizQuestion Quiz_Question;
         private System.Windows.Forms.Button BtnCreate;
+        private System.Windows.Forms.ListBox lstQuiz;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button BtnStart;
+        private System.Windows.Forms.ListBox lstUsers;
+        private System.Windows.Forms.Label label3;
     }
 }
