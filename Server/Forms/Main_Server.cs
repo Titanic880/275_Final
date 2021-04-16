@@ -58,7 +58,9 @@ namespace Server.Forms
             manager.Sess_New += NewSession;
             manager.UserDef += UserDef;
             manager.Start_Quiz += Manager_Start_Quiz;
+            manager.scores += Manager_scores;
         }
+
         #region Delegates
         private void NewClientConnected(Client_Object client)
         {
@@ -148,8 +150,9 @@ namespace Server.Forms
             List<User> users = new List<User>();
             //Loads the users that are in the session
             foreach (Client_Object a in Clients)
-                if (a.User_Obj.Current_Session == _Start.Active_Session)
-                    users.Add(a.User_Obj);
+                if (_Start.Host != a.User_Obj)
+                    if (a.User_Obj.Current_Session == _Start.Active_Session)
+                        users.Add(a.User_Obj);
 
             _Start.Participatants = users.ToArray();
 
@@ -159,8 +162,17 @@ namespace Server.Forms
                     a.SendMessage(_Start);
         }
 
+        private void Manager_scores(Score_Update _Update)
+        {
+            //Sends the update for the client to deal with (INCLUDES HOST)
+            foreach(Client_Object a in Clients)
+                if(a.User_Obj.Current_Session == _Update.user.Current_Session)
+                {
+                    a.SendMessage(_Update);
+                }
+        }
         #endregion Delegates
-        
+
         private void RelayMessage(object message)
         {
             //Loops through each User

@@ -44,6 +44,8 @@ namespace Quiz_Client
             this.BtnStart = new System.Windows.Forms.Button();
             this.lstUsers = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.lblWrong = new System.Windows.Forms.Label();
+            this.BtnDisconnect = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // BtnHost
@@ -177,11 +179,33 @@ namespace Quiz_Client
             this.label3.TabIndex = 23;
             this.label3.Text = "Connected Users";
             // 
+            // lblWrong
+            // 
+            this.lblWrong.AutoSize = true;
+            this.lblWrong.Location = new System.Drawing.Point(146, 58);
+            this.lblWrong.Name = "lblWrong";
+            this.lblWrong.Size = new System.Drawing.Size(88, 13);
+            this.lblWrong.TabIndex = 24;
+            this.lblWrong.Text = "Wrong Answers: ";
+            // 
+            // BtnDisconnect
+            // 
+            this.BtnDisconnect.Location = new System.Drawing.Point(138, 162);
+            this.BtnDisconnect.Name = "BtnDisconnect";
+            this.BtnDisconnect.Size = new System.Drawing.Size(120, 37);
+            this.BtnDisconnect.TabIndex = 25;
+            this.BtnDisconnect.Text = "Disconnect from Session";
+            this.BtnDisconnect.UseVisualStyleBackColor = true;
+            this.BtnDisconnect.Visible = false;
+            this.BtnDisconnect.Click += new System.EventHandler(this.BtnDisconnect_Click);
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.BtnDisconnect);
+            this.Controls.Add(this.lblWrong);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lstUsers);
             this.Controls.Add(this.BtnStart);
@@ -221,5 +245,7 @@ namespace Quiz_Client
         private System.Windows.Forms.Button BtnStart;
         private System.Windows.Forms.ListBox lstUsers;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblWrong;
+        private System.Windows.Forms.Button BtnDisconnect;
     }
 }

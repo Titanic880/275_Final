@@ -29,6 +29,9 @@ namespace Quiz_Client
         public event Connection Connected;
         public delegate void Connection();
 
+        public event Session Ses_Get;
+        public delegate void Session(Session_ session);
+
         /// <summary>
         /// Recieves a list of Quizzes for displaying
         /// </summary>
@@ -46,6 +49,18 @@ namespace Quiz_Client
         /// </summary>
         public event PingRes Result_Ping;
         public delegate void PingRes(Ping_Result result);
+
+        /// <summary>
+        /// Recieves the quiz and other information needed to start the quiz
+        /// </summary>
+        public event RecievedQuizStart QStart;
+        public delegate void RecievedQuizStart(Quiz_Start _Start);
+
+        /// <summary>
+        /// Recieves a new score from a user
+        /// </summary>
+        public event ScoreUpdate S_Update;
+        public delegate void ScoreUpdate(Score_Update score);
         #endregion Delegates
 
         //User Stack
@@ -121,7 +136,15 @@ namespace Quiz_Client
                         Result_Ping((Ping_Result)o);
                         break;
                     case Quiz_Start _:
+                        QStart((Quiz_Start)o);
+                        break;
+                    case Score_Update _:
+                        S_Update((Score_Update)o);
+                        break;
+                    case Session_ _:
 
+                        break;
+                    default:
                         break;
                 }
             }

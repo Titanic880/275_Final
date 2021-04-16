@@ -40,6 +40,8 @@ namespace Standards_Final.Users
         /// </summary>
         public int Wrong_Score { get; set; }
         
+        public string stuff { get { return $"{UserName}: C: {Current_Score} W: {Wrong_Score}"; } }
+
         /// <summary>
         /// What session they are currently Active in
         /// </summary>

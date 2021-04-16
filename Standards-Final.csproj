@@ -57,6 +57,7 @@
     <Compile Include="Sessions\New_Session.cs" />
     <Compile Include="Sessions\Ping_Result.cs" />
     <Compile Include="Sessions\Quiz_Start.cs" />
+    <Compile Include="Sessions\Score_Update.cs" />
     <Compile Include="Sessions\Session_.cs" />
     <Compile Include="Sessions\Ping_Request.cs" />
     <Compile Include="Sessions\Session_End.cs" />

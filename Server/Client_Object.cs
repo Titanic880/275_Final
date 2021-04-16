@@ -40,6 +40,9 @@ namespace Server
 
         public event StartQuiz Start_Quiz;
         public delegate void StartQuiz(Quiz_Start _Start);
+
+        public event Update_Score scores;
+        public delegate void Update_Score(Score_Update _Update);
         #endregion Delegates
 
         //Main worker
@@ -170,7 +173,9 @@ namespace Server
                 case Quiz_Start _:
                     Start_Quiz((Quiz_Start) Sort);
                     break;
-
+                case Score_Update _:
+                    scores((Score_Update)Sort);
+                    break;
                 default:
                     break;
             }

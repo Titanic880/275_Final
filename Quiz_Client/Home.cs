@@ -13,6 +13,9 @@ namespace Quiz_Client
         /// Decrements the progress bar and decides when the game is over
         /// </summary>
         readonly Timer TimeLeft = new Timer();
+        private int Q_Index = 0;
+        private Question[] questions;
+
 
         public Home()
         {
@@ -24,6 +27,10 @@ namespace Quiz_Client
             //Ties into some Delegates
             LaunchForm.Host_.GetQuiz += Host__GetQuiz;
             LaunchForm.Host_.Result_Ping += Host__Result_Ping;
+            LaunchForm.Host_.QStart += Host__QStart;
+            LaunchForm.Host_.S_Update += Host__S_Update;
+            LaunchForm.Host_.Ses_Get += Host__Ses_Get;
+
             //Sets up the basic timer
             TimeLeft.Interval = 100;
             TimeLeft.Tick += TimeLeft_Tick;
@@ -66,6 +73,44 @@ namespace Quiz_Client
             {
                 MessageBox.Show($"Session {result.Session_ID} does not exist!");
             }
+        }
+
+        private void Host__QStart(Quiz_Start _Start)
+        {
+            BeginInvoke(new MethodInvoker(() => QStart(_Start)));
+        }
+        private void QStart(Quiz_Start _Start)
+        {
+            LoadUsers(_Start.Participatants);
+            
+            //Checks if the client is the host
+            if(LaunchForm.Host_.Active_User != _Start.Host)
+            {
+                //prepares the quiz
+                questions = _Start.Quiz_Questions;
+                Reset_Next();
+
+                //Starts the quiz
+                MessageBox.Show("Quiz will begin when this is closed");
+                TimeLeft.Start();
+            }
+        }
+
+        private void Host__S_Update(Score_Update score)
+        {
+            BeginInvoke(new MethodInvoker(() => UpdateUser(score.user)));
+        }
+
+
+        private void Host__Ses_Get(Session_ session)
+        {
+            BeginInvoke(new MethodInvoker(() => Ses_Get(session)));
+        }
+
+        private void Ses_Get(Session_ session)
+        {
+            LaunchForm.Host_.Active_User.Current_Session = session;\
+            UpdateGui();
         }
         #endregion Delegates
         #region Events
@@ -114,18 +159,63 @@ namespace Quiz_Client
         private void Reset_Next()
         {
             //Sets up the Question
-
             if (Quiz_Question.Correct)
             {
                 LaunchForm.Host_.Active_User.Current_Score++;
                 lblCorrect.Text = $"Correct Answers: {LaunchForm.Host_.Active_User.Current_Score}";
             }
+            else
+            {
+                LaunchForm.Host_.Active_User.Wrong_Score++;
+                lblWrong.Text = $"Wrong Answers: {LaunchForm.Host_.Active_User.Wrong_Score}";
+            }
 
             //Reloads with a new Question
-            Quiz_Question = new QuizQuestion(/*NEW QUESTION GOES HERE*/);
+            Quiz_Question = new QuizQuestion(questions[Q_Index]);
             Quiz_Question.Update();
-            //Add Score update for others here?
+            
+            //Updates Question index
+            Q_Index++;
+
+            //Builds and sends the updated user with updated score
+            Score_Update update = new Score_Update
+            {
+                user = LaunchForm.Host_.Active_User
+            };
+            LaunchForm.Host_.Send_To_Server(update);
         }
+
+        /// <summary>
+        /// Updates the list with new users
+        /// </summary>
+        /// <param name="users"></param>
+        private void LoadUsers(User[] users)
+        {
+            lstUsers.Items.Clear();
+            foreach (User a in users)
+            {
+                lstUsers.AccessibleName = "stuff";
+                lstUsers.Items.Add(a);
+            }
+            
+        }
+
+        /// <summary>
+        /// Updates a single user in the list
+        /// </summary>
+        /// <param name="user"></param>
+        private void UpdateUser(User user)
+        {
+            for(int i = 0; i < lstUsers.Items.Count; i++)
+            {
+                if(((User)lstUsers.Items[i]).Id == user.Id)
+                {
+                    lstUsers.Items.RemoveAt(i);
+                    lstUsers.Items.Insert(i, user);
+                }
+            }
+        }
+
         #endregion
 
         #region Buttons
@@ -204,5 +294,19 @@ namespace Quiz_Client
             ///And set them up into a 'Waiting for Quiz to begin' mode
         }
         #endregion Buttons
+
+        private void BtnDisconnect_Click(object sender, EventArgs e)
+        {
+            //NOT NEEDED?
+            LaunchForm.Host_.Active_User.Current_Score = 0;
+            LaunchForm.Host_.Active_User.Wrong_Score = 0;
+            Session_DC _DC = new Session_DC
+            {
+                session = LaunchForm.Host_.Active_User.Current_Session
+            };
+            LaunchForm.Host_.Active_User.Current_Session = null;
+            _DC.user = LaunchForm.Host_.Active_User;
+            LaunchForm.Host_.Send_To_Server(_DC);
+        }
     }
 }
