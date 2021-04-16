@@ -106,7 +106,7 @@ namespace Server.Forms
                 for (int i = 0; i < 6; i++)
                 {
                     int Letter = rand.Next(26) + 65;
-                    bool Upper = Convert.ToBoolean(rand.Next(0, 1));
+                    bool Upper = Convert.ToBoolean(rand.Next(2));
                     if (Upper)
                         Letter += 32;
 
@@ -148,17 +148,20 @@ namespace Server.Forms
             //Gets the Array of questions
             string[] Str_Ids = _Start.The_Quiz.Questions_Str.Split(',');
             Question[] questions = new Question[Str_Ids.Length];
-            for (int i = 0; i < Str_Ids.Length - 1; i++)
+            for (int i = 0; i < Str_Ids.Length; i++)
                 if (int.TryParse(Str_Ids[i], out int ID))
                     questions[i] = Server_DbLogic.Get_Specific_Question(ID);
                 else
                     lstUMessage.Items.Add($"Session {_Start.Active_Session.Session_ID} Tried to access non existent Question with ID {Str_Ids[i]}");
 
+            //Assigns the questions to the quiz
+            _Start.Quiz_Questions = questions;
+
             List<User> users = new List<User>();
             //Loads the users that are in the session
             foreach (Client_Object a in Clients)
-                if (_Start.Host != a.User_Obj)
-                    if (a.User_Obj.Current_Session == _Start.Active_Session)
+                if (_Start.Host.Id != a.User_Obj.Id)
+                    if (a.User_Obj.Current_Session.Session_ID == _Start.Active_Session.Session_ID)
                         users.Add(a.User_Obj);
 
             _Start.Participatants = users.ToArray();
@@ -192,6 +195,7 @@ namespace Server.Forms
                         Does_Exist = true,
                         Session_ID = a.Session_ID
                     };
+                    client.User_Obj.Current_Session = ses;
                     client.SendMessage(res);
                 }
             }

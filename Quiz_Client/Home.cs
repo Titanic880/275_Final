@@ -16,7 +16,7 @@ namespace Quiz_Client
         readonly Timer TimeLeft = new Timer();
         private int Q_Index = 0;
         private Question[] questions;
-
+        private bool inprogress = false;
 
         public Home()
         {
@@ -156,7 +156,6 @@ namespace Quiz_Client
             {
                 TimeLeft.Stop();
                 Reset_Next();
-                TimeLeft.Start();
             }
         }
 
@@ -165,22 +164,43 @@ namespace Quiz_Client
         /// </summary>
         private void Reset_Next()
         {
-            //Sets up the Question
-            if (Quiz_Question.Correct)
+            //Checks if theres a test going on
+            if (inprogress && Q_Index == 0)
             {
-                LaunchForm.Host_.Active_User.Current_Score++;
-                lblCorrect.Text = $"Correct Answers: {LaunchForm.Host_.Active_User.Current_Score}";
+                if (Quiz_Question.Correct)
+                {
+                    LaunchForm.Host_.Active_User.Current_Score++;
+                    lblCorrect.Text = $"Correct Answers: {LaunchForm.Host_.Active_User.Current_Score}";
+                }
+                else
+                {
+                    LaunchForm.Host_.Active_User.Wrong_Score++;
+                    lblWrong.Text = $"Wrong Answers: {LaunchForm.Host_.Active_User.Wrong_Score}";
+                }
             }
-            else
+            //Checks for the end of the test
+            else if (Q_Index == questions.Length)
             {
-                LaunchForm.Host_.Active_User.Wrong_Score++;
-                lblWrong.Text = $"Wrong Answers: {LaunchForm.Host_.Active_User.Wrong_Score}";
+                inprogress = false;
+
+                Score_Update updatea = new Score_Update
+                {
+                    user = LaunchForm.Host_.Active_User
+                };
+                LaunchForm.Host_.Send_To_Server(updatea);
+
+                MessageBox.Show("End of quiz!");
+                return;
             }
 
             //Reloads with a new Question
             Quiz_Question = new QuizQuestion(questions[Q_Index]);
             Quiz_Question.Update();
-            
+
+            //Updates the progress bar
+            prgTimeLeft.Maximum = questions[Q_Index].Question_Time;
+            prgTimeLeft.Value = prgTimeLeft.Maximum;
+
             //Updates Question index
             Q_Index++;
 
@@ -189,7 +209,10 @@ namespace Quiz_Client
             {
                 user = LaunchForm.Host_.Active_User
             };
-            LaunchForm.Host_.Send_To_Server(update);
+            LaunchForm.Host_.Send_To_Server(update);    
+            
+            if(inprogress)
+                TimeLeft.Start();
         }
 
         /// <summary>
