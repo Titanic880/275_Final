@@ -81,10 +81,12 @@ namespace Server
             if (C_Socket == null)
                 return;
 
+            //Sets up the Main Stream
             C_nStream = new NetworkStream(C_Socket);
             if (C_nStream == null)
                 return;
 
+            //Sets up the Read/Writer Objects
             C_reader = new BinaryReader(C_nStream);
             C_writer = new BinaryWriter(C_nStream);
 
@@ -93,10 +95,15 @@ namespace Server
             while (!wkr.CancellationPending)
             {
                 //Error checking
-                if (C_reader == null)
-                    continue;
-                else if (C_reader.BaseStream == null)
-                    continue;
+                if (C_nStream == null)
+                {
+                    C_nStream = new NetworkStream(C_Socket);
+                    if (C_reader == null)
+                        C_reader = new BinaryReader(C_nStream);
+                    
+                    if (C_reader.BaseStream == null)
+                        continue;
+                }
 
                 //Distrobution of information
                 object o = formatter.Deserialize(C_reader.BaseStream);
@@ -177,6 +184,7 @@ namespace Server
 
             else if (C_writer == null)  //Checks for writer, if its null wait a second for initilization attempt
             {
+                //Depreciated?
                 System.Threading.Thread.Sleep(1000);
                 if (C_writer == null)
                     return;

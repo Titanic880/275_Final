@@ -31,7 +31,15 @@ namespace Standards_Final.Users
         /// </summary>
         public bool Temp { get; set; }
 
+        /// <summary>
+        /// Total correct answers so far in the quiz
+        /// </summary>
         public int Current_Score { get; set; }
+        /// <summary>
+        /// Total wrong answers so far in the Quiz
+        /// </summary>
+        public int Wrong_Score { get; set; }
+        
         /// <summary>
         /// What session they are currently Active in
         /// </summary>

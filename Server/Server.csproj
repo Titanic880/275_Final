@@ -191,6 +191,10 @@
     <Compile Include="Migrations\20210415230026_NewQuiz.designer.cs">
       <DependentUpon>20210415230026_NewQuiz.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20210416042205_Scoring-User.cs" />
+    <Compile Include="Migrations\20210416042205_Scoring-User.designer.cs">
+      <DependentUpon>20210416042205_Scoring-User.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Server_DbContextModelSnapshot.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
