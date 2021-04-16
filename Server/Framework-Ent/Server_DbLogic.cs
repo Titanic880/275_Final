@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Standards_Final.Users;
+﻿using System.Linq;
+using System;
+
 using Standards_Final.Network;
+using Standards_Final.Quizlet;
+using Standards_Final.Users;
 
 namespace Server.Framework_Ent
 {
@@ -113,8 +112,7 @@ namespace Server.Framework_Ent
         #endregion Client
 
         #region Questions
-
-        public static void Add_Question(Standards_Final.Quizlet.Question question)
+        public static void Add_Question(Question question)
         {
             using (Server_DbContext db = new Server_DbContext())
             {
@@ -125,9 +123,9 @@ namespace Server.Framework_Ent
             }
         }
 
-        public static Standards_Final.Quizlet.Question[] Get_Questions()
+        public static Question[] Get_Questions()
         {
-            Standards_Final.Quizlet.Question[] arr;
+            Question[] arr;
             using (Server_DbContext db = new Server_DbContext())
             {
                 arr = db.Db_Questions.ToArray();
@@ -136,7 +134,7 @@ namespace Server.Framework_Ent
         }
         #endregion Questions
         #region Quiz
-        public static void Add_Quiz(Standards_Final.Quizlet.Quiz quiz)
+        public static void Add_Quiz(Quiz quiz)
         {
             using (Server_DbContext db = new Server_DbContext())
             {
@@ -146,9 +144,9 @@ namespace Server.Framework_Ent
                 db.SaveChanges();
             }
         }
-        public static Standards_Final.Quizlet.Quiz[] Get_Quiz(User user = null)
+        public static Quiz[] Get_Quiz(User user = null)
         {
-            Standards_Final.Quizlet.Quiz[] arr;
+            Quiz[] arr;
             using (Server_DbContext db = new Server_DbContext()) 
             {
                 if (user == null)

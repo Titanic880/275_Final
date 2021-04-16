@@ -13,10 +13,6 @@ namespace Quiz_Client
         /// Decrements the progress bar and decides when the game is over
         /// </summary>
         readonly Timer TimeLeft = new Timer();
-        /// <summary>
-        /// Amount of correct answers of the client
-        /// </summary>
-        private int Correct_Answers = 0;
 
         private Question Prev;
         /// <summary>
@@ -132,7 +128,7 @@ namespace Quiz_Client
             if (Quiz_Question.Correct)
             {
                 LaunchForm.Host_.Active_User.Current_Score++;
-                lblCorrect.Text = $"Correct Answers: {Correct_Answers}";
+                lblCorrect.Text = $"Correct Answers: {LaunchForm.Host_.Active_User.Current_Score}";
             }
 
             //Reloads with a new Question
@@ -187,8 +183,15 @@ namespace Quiz_Client
         {
             //Resets players Score
             LaunchForm.Host_.Active_User.Current_Score = 0;
-            Session_Conn session = new Session_Conn();
-            session.Session_ID = TbSession.Text;
+            
+            //FIGURE OUT A WAY TO PING THE SERVER TO SEE IF THE SESSION EXISTS
+            //If it does then let the client know, and if it doesn't let the client know
+            //if it does then tie them to that given session
+            //And set them up into a 'Waiting for Quiz to begin' mode
+            
+            //Session_Conn session = new Session_Conn();
+            //session.Session_ID = TbSession.Text;
+
 
         }
         #endregion Buttons
