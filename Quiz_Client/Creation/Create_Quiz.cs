@@ -110,7 +110,7 @@ namespace Quiz_Client.Creation
 
             if (dia == DialogResult.Yes)
                 quiz.Accessiblity = true;
-            quiz.Creator_ID = Active_User.Active_User_Object.Id;
+            quiz.Creator_ID = LaunchForm.Host_.Active_User.Id;
             quiz.AccessUsers += quiz.Creator_ID+ ",";
 
             LaunchForm.Host_.Send_To_Server(new NewQuiz(quiz));

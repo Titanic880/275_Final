@@ -1,30 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Standards_Final.Sessions;
 using System.Windows.Forms;
 using Standards_Final;
+using System.Data;
+using System.Linq;
+using System.Net;
+using System;
 
 namespace Quiz_Client
 {
     public partial class LaunchForm : Form
     {
+        /// <summary>
+        /// PRIMARY CONTROLLER OF CLIENT
+        /// </summary>
         public static Host_Connection Host_ { get; private set; }
 
         public LaunchForm()
         {
             InitializeComponent();
+            //Sets up Network IP List
             TbCustomIP.Text = Dns.GetHostEntry(SystemInformation.ComputerName).AddressList
                .Where(x => x.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork).First().ToString();
         }
         #region Buttons
         private void BtnLogin_Click(object sender, EventArgs e)
         {
+            //Creates a login Request with the USER provided Credentials
             Standards_Final.Network.Login_Request request = new Standards_Final.Network.Login_Request
             {
                 ReqUser = new Standards_Final.Users.User
@@ -32,25 +33,43 @@ namespace Quiz_Client
                 Standards.Hasher(MTbPass.Text))
             };
 
+            //Sends request to the server
             Host_.Send_To_Server(request);
         }
 
         private void BtnRegister_Click(object sender, EventArgs e)
         {
+            //Creates a register request with the USER provided Credentials
             Standards_Final.Network.Register_Request request = new Standards_Final.Network.Register_Request
             {
                 Username = MTbUsername.Text,
                 Password = Standards.Hasher(MTbPass.Text)
             };
 
+            //Sends request to the server
             Host_.Send_To_Server(request);
         }
 
+        /// <summary>
+        /// Gets the interal set ip and connects to it
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnHostCon_Click(object sender, EventArgs e)
-        => Connect(Standards_Final.Standards.GetHostIP_String());
+        => Connect(Standards.GetHostIP_String());
+        /// <summary>
+        /// Uses the IP from the Combo box to connect
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnConnectCustom_Click(object sender, EventArgs e)
         => Connect(TbCustomIP.Text);
 
+        /// <summary>
+        /// Connects as an anonomyous user
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnAnon_Click(object sender, EventArgs e)
         {
             //Creates a user and passes it to the server
@@ -58,24 +77,22 @@ namespace Quiz_Client
             {
                 UserName = TbNick.Text
             };
-            anon.Current_Session.Session_ID = TbSession.Text;
+
             anon.Temp = true;
 
             Host_.Send_To_Server(anon);
+            //OPEN HOME HERE (With restrictions)
         }
         #endregion Buttons
-
+        /// <summary>
+        /// Primary Method used to connect to a Server (Host)
+        /// </summary>
+        /// <param name="Ip"></param>
         private void Connect(string Ip)
         {
+            //Creates a new 
             Host_ = new Host_Connection(Ip);
             Host_.Login_Res += Host__Login_Res;
-            Host_.FromServer += Host__FromServer;
-            Host_Connected();
-        }
-
-        private void Host__FromServer(object package)
-        {
-
         }
 
         private void OpenHome()
@@ -88,15 +105,15 @@ namespace Quiz_Client
         #region Delegates
         private void Host_Connected()
         {
+            //User connection Stuff
             BtnLogin.Enabled = true;
             BtnRegister.Enabled = true;
             MTbUsername.Enabled = true;
             MTbPass.Enabled = true;
-
+            //Anonymous connection stuff
             BtnAnon.Enabled = true;
             TbNick.Enabled = true;
-            TbSession.Enabled = true;
-
+            //TCP Connection stuff
             BtnConnectCustom.Enabled = false;
             BtnHostCon.Enabled = false;
             TbCustomIP.Enabled = false;
@@ -106,13 +123,14 @@ namespace Quiz_Client
         {
             if (result.User != null)
             {
-                Active_User.Active_User_Object = result.User;
+                //Sets the Client User
+                Host_.Active_User = result.User;
                 Host_.Send_To_Server(result.User);
+                //Checks if the person is a new user
                 if (result.New_User)
                     MessageBox.Show($"Hello and welcome to kahoot.Clone {result.User.UserName}");
                 else
                     MessageBox.Show($"Hello {result.User.UserName}");
-
             }
             else
             {
@@ -125,4 +143,4 @@ namespace Quiz_Client
         }
         #endregion
     }
-    }
+}

@@ -30,8 +30,6 @@ namespace Quiz_Client
         private void InitializeComponent()
         {
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.TbSession = new System.Windows.Forms.MaskedTextBox();
             this.TbNick = new System.Windows.Forms.MaskedTextBox();
             this.BtnAnon = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -49,33 +47,16 @@ namespace Quiz_Client
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(280, 52);
+            this.label3.Location = new System.Drawing.Point(280, 91);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(57, 13);
             this.label3.TabIndex = 35;
             this.label3.Text = "NickName";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(280, 91);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(58, 13);
-            this.label4.TabIndex = 34;
-            this.label4.Text = "Session ID";
-            // 
-            // TbSession
-            // 
-            this.TbSession.Enabled = false;
-            this.TbSession.Location = new System.Drawing.Point(278, 107);
-            this.TbSession.Name = "TbSession";
-            this.TbSession.Size = new System.Drawing.Size(125, 20);
-            this.TbSession.TabIndex = 8;
-            // 
             // TbNick
             // 
             this.TbNick.Enabled = false;
-            this.TbNick.Location = new System.Drawing.Point(278, 68);
+            this.TbNick.Location = new System.Drawing.Point(278, 107);
             this.TbNick.Name = "TbNick";
             this.TbNick.Size = new System.Drawing.Size(125, 20);
             this.TbNick.TabIndex = 7;
@@ -191,8 +172,6 @@ namespace Quiz_Client
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(458, 261);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.TbSession);
             this.Controls.Add(this.TbNick);
             this.Controls.Add(this.BtnAnon);
             this.Controls.Add(this.label2);
@@ -215,8 +194,6 @@ namespace Quiz_Client
         #endregion
 
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.MaskedTextBox TbSession;
         private System.Windows.Forms.MaskedTextBox TbNick;
         private System.Windows.Forms.Button BtnAnon;
         private System.Windows.Forms.Label label2;

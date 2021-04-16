@@ -1,13 +1,6 @@
 ﻿using Standards_Final.Users;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System;
 
 namespace Quiz_Client
 {
@@ -36,7 +29,7 @@ namespace Quiz_Client
         private void Host__GetSession(Standards_Final.Sessions.Session_Conn session)
         {
             BeginInvoke(new MethodInvoker(() => UpdateLabelSession("Session ID: " + session.Session_ID)));
-            Active_User.Active_User_Object.Current_Session = session;
+            LaunchForm.Host_.Active_User.Current_Session = session;
         }
         private void UpdateLabelSession(string txt)
         {
@@ -103,7 +96,7 @@ namespace Quiz_Client
 
             Standards_Final.Sessions.New_Session ses = new Standards_Final.Sessions.New_Session
             {
-                Host = Active_User.Active_User_Object
+                Host = LaunchForm.Host_.Active_User
             };
 
             if (res == DialogResult.Yes)

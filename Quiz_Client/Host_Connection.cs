@@ -14,6 +14,7 @@ namespace Quiz_Client
     public class Host_Connection
     {
         private readonly string IPAddress;
+        public User Active_User { get; set; }
 
         #region Delegates
         /// <summary>
@@ -111,6 +112,7 @@ namespace Quiz_Client
 
                 //I WISH THIS COULD BE A SWITCH (V9.0 (.net 5) isnt out yet however :( )
 
+#pragma warning disable IDE0038 // Use pattern matching (Was easier to read without pattern matching)
                 if (o is Login_Result)
                     Login_Res((Login_Result)o);
 
@@ -128,6 +130,7 @@ namespace Quiz_Client
 
                 else if (o is Active_Question)
                     QuestionGet((Active_Question)o);
+#pragma warning restore IDE0038 // Use pattern matching
             }
         }
 

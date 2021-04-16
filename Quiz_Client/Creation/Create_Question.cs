@@ -49,7 +49,7 @@ namespace Quiz_Client.Creation
                     if (int.TryParse(TbQ.Text, out int res))
                         Timer = res;
 
-                    Q = new Question(Active_User.Active_User_Object.Id,
+                    Q = new Question(LaunchForm.Host_.Active_User.Id,
                                      TbQ.Text,
                                      Answers.ToArray(),
                                      C_Answers.ToArray(),
