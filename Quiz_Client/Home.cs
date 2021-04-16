@@ -1,9 +1,10 @@
-﻿using Standards_Final.Users;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using System;
 
 using Standards_Final.Sessions;
 using Standards_Final.Quizlet;
+using Standards_Final.Network;
+using Standards_Final.Users;
 
 namespace Quiz_Client
 {
@@ -31,6 +32,7 @@ namespace Quiz_Client
             LaunchForm.Host_.S_Update += Host__S_Update;
             LaunchForm.Host_.Ses_Get += Host__Ses_Get;
 
+            LaunchForm.Host_.Send_To_Server(new Request<Quiz[]>());
             //Sets up the basic timer
             TimeLeft.Interval = 100;
             TimeLeft.Tick += TimeLeft_Tick;
@@ -84,7 +86,7 @@ namespace Quiz_Client
             LoadUsers(_Start.Participatants);
             
             //Checks if the client is the host
-            if(LaunchForm.Host_.Active_User != _Start.Host)
+            if(LaunchForm.Host_.Active_User.UserName != _Start.Host.UserName)
             {
                 //prepares the quiz
                 questions = _Start.Quiz_Questions;
@@ -111,7 +113,11 @@ namespace Quiz_Client
         {
             lblSession.Text = "Session ID: " + session.Session_ID;
             LaunchForm.Host_.Active_User.Current_Session = session;
-            UpdateGui();
+            TbSession.Enabled = false;
+            BtnHost.Enabled = false;
+            BtnCreate.Enabled = false;
+            BtnSessionConnect.Enabled = false;
+
         }
         #endregion Delegates
         #region Events
@@ -199,6 +205,10 @@ namespace Quiz_Client
                 lstUsers.Items.Add(a);
             }
             
+            if(lstUsers.Items.Count == 0)
+            {
+                MessageBox.Show("No participants!");
+            }
         }
 
         /// <summary>
@@ -225,6 +235,7 @@ namespace Quiz_Client
             //easier to update all Gui then change back what i care about
             UpdateGui();
             BtnStart.Enabled = true;
+            lstQuiz.Enabled = true;
 
             //Prompts the user if they want it to be public
             DialogResult res = MessageBox.Show("Is this session public?", "", MessageBoxButtons.YesNo);

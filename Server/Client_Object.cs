@@ -166,7 +166,7 @@ namespace Server
                     Server_DbLogic.Add_Quiz(((NewQuiz)e.UserState).newQ);
                     break;
                 //Recieves a list of all accessible quizzes
-                case Quiz[] _:
+                case Request<Quiz[]> _:
                     SendMessage(Server_DbLogic.Get_Quiz(User_Obj));
                     break;
                 //Recieves a list of all questions

@@ -40,10 +40,17 @@ namespace Server.Forms
 
         private void BtnStart_Click(object sender, EventArgs e)
         {
+            BtnStart.Enabled = false;
             //Grabs the ip and starts the listener
             IPAddress serverIP = (IPAddress)CbIP.SelectedValue;
-            tcpListener = new TcpListener(serverIP, Standards_Final.Standards.Port);
-            tcpListener.Start();
+            if (tcpListener != null)
+            {
+                MessageBox.Show("Already started!");
+                return;
+            }    
+            
+                tcpListener = new TcpListener(serverIP, Standards_Final.Standards.Port);
+                tcpListener.Start();
 
             lstError.Items.Add($"Server Started on {serverIP}:{Standards_Final.Standards.Port}");
 
@@ -121,6 +128,7 @@ namespace Server.Forms
                 lstSessions.AccessibleName = "Session_ID";
                 lstSessions.Items.Add(Session);
                 Session.Is_Host = true;
+                client.User_Obj.Current_Session = Session;
                 client.SendMessage(Session);
             }
         }
@@ -157,7 +165,7 @@ namespace Server.Forms
 
             //Sends the final session to the users
             foreach (Client_Object a in Clients)
-                if (a.User_Obj.Current_Session == _Start.Active_Session)
+                if (a.User_Obj.Current_Session.Session_ID == _Start.Active_Session.Session_ID)
                     a.SendMessage(_Start);
         }
 

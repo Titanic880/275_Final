@@ -1,4 +1,6 @@
-﻿using Standards_Final.Quizlet;
+﻿using System;
+
+using Standards_Final.Quizlet;
 using Standards_Final.Users;
 
 namespace Standards_Final.Sessions
@@ -7,6 +9,7 @@ namespace Standards_Final.Sessions
     /// The object that is sent to the participates which is forwarded to the server by the host 
     /// Server Fills out Participants and Questions
     /// </summary>
+    [Serializable]
     public class Quiz_Start
     {
         /// <summary>
