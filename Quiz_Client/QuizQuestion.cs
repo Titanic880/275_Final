@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Standards_Final.Quizlet;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,17 +18,17 @@ namespace Quiz_Client
         /// Whether or not a correct answer was hit
         /// </summary>
         public bool Correct { get; private set; } = false;
-        private readonly Standards_Final.Quizlet.Question q;
+        private Question q;
 
         public QuizQuestion() { InitializeComponent(); }
-        public QuizQuestion(Standards_Final.Quizlet.Question Q)
+
+        public void LoadQuestion(Question question)
         {
-            InitializeComponent();
-            q = Q;
-            string[] QRand = Q.Vis_Answers.OrderBy(x => rand.Next()).ToArray();
+            q = question;
+            string[] QRand = q.Vis_Answers.OrderBy(x => rand.Next()).ToArray();
 
             //Loads label
-            lblQuestion.Text = Q.Vis_Question;
+            lblQuestion.Text = q.Vis_Question;
             //Loads buttons with the answers
             BtnQ1.Text = QRand[0];
             BtnQ2.Text = QRand[1];

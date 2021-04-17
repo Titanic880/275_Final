@@ -34,7 +34,7 @@ namespace Quiz_Client
 
             LaunchForm.Host_.Send_To_Server(new Request<Quiz[]>());
             //Sets up the basic timer
-            TimeLeft.Interval = 100;
+            TimeLeft.Interval = 1000;
             TimeLeft.Tick += TimeLeft_Tick;
             Quiz_Question.Enabled = false;
 
@@ -194,7 +194,7 @@ namespace Quiz_Client
             }
 
             //Reloads with a new Question
-            Quiz_Question = new QuizQuestion(questions[Q_Index]);
+            Quiz_Question.LoadQuestion(questions[Q_Index]);
             Quiz_Question.Update();
 
             //Updates the progress bar
