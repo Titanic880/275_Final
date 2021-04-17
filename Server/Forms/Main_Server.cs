@@ -125,7 +125,7 @@ namespace Server.Forms
                 }
 
                 //If session is not found then it adds it to the list and sends it back to the host
-                lstSessions.AccessibleName = "Session_ID";
+                lstSessions.DisplayMember = "Session_ID";
                 lstSessions.Items.Add(Session);
                 Session.Is_Host = true;
                 client.User_Obj.Current_Session = Session;

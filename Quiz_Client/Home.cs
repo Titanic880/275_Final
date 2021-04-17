@@ -55,7 +55,7 @@ namespace Quiz_Client
         }
         private void UpdateQuizList(Quiz[] quizzes)
         {
-            lstQuiz.AccessibleName = "Id";
+            lstQuiz.DisplayMember = "Id";
             lstQuiz.DataSource = quizzes;
         }
 
@@ -94,6 +94,7 @@ namespace Quiz_Client
 
                 //Starts the quiz
                 MessageBox.Show("Quiz will begin when this is closed");
+                Quiz_Question.Enabled = true;
                 TimeLeft.Start();
             }
         }
@@ -224,7 +225,7 @@ namespace Quiz_Client
             lstUsers.Items.Clear();
             foreach (User a in users)
             {
-                lstUsers.AccessibleName = "stuff";
+                lstUsers.DisplayMember = "stuff";
                 lstUsers.Items.Add(a);
             }
             

@@ -33,7 +33,7 @@ namespace Quiz_Client.Creation
         {
             foreach(Question q in Q)
             {
-                lstPub.AccessibleName = "Vis_Question";
+                lstPub.DisplayMember = "Vis_Question";
                 lstPub.Items.Add(q);
             }
         }
