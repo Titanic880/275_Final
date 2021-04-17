@@ -106,7 +106,7 @@ namespace Quiz_Client
 
             Connected();
             //MAIN LOOP
-            while (!wkr.CancellationPending)
+            while (true)
             {
                 //Checks if the stream is broken
                 if (nStream == null)

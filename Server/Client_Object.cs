@@ -101,7 +101,7 @@ namespace Server
 
             IFormatter formatter = new BinaryFormatter();
 
-            while (!wkr.CancellationPending)
+            while (true)
             {
                 //Error checking
                 if (C_nStream == null)
@@ -170,7 +170,7 @@ namespace Server
                     SendMessage(Server_DbLogic.Get_Quiz(User_Obj));
                     break;
                 //Recieves a list of all questions
-                case Question[] _:
+                case Request<Question[]> _:
                     SendMessage(Server_DbLogic.Get_Questions());
                     break;
                 case Quiz_Start _:

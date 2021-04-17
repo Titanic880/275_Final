@@ -99,6 +99,15 @@ namespace Quiz_Client.Creation
         private void BtnFinish_Click(object sender, EventArgs e)
         {
             Quiz quiz = new Quiz();
+            if (string.IsNullOrWhiteSpace(TbQuizName.Text.Trim()))
+            {
+                DialogResult def = MessageBox.Show("Would you like to use the default name?", "Empty Name?", MessageBoxButtons.YesNo);
+                if (def == DialogResult.Yes)
+                    quiz.Q_Name = $"DEFAULTNAME";
+            }
+            else
+                quiz.Q_Name = TbQuizName.Text;
+
             string tmp = null;
             foreach (Question quest in lstQuiz.Items)
             {
@@ -106,14 +115,16 @@ namespace Quiz_Client.Creation
             }
             tmp = tmp.TrimEnd(',');
             quiz.Questions_Str = tmp;
-            DialogResult dia = MessageBox.Show("Is this public?", "Public?", MessageBoxButtons.YesNo);
 
+            DialogResult dia = MessageBox.Show("Is this public?", "Public?", MessageBoxButtons.YesNo);
             if (dia == DialogResult.Yes)
                 quiz.Accessiblity = true;
+
             quiz.Creator_ID = LaunchForm.Host_.Active_User.Id;
             quiz.AccessUsers += quiz.Creator_ID+ ",";
 
             LaunchForm.Host_.Send_To_Server(new NewQuiz(quiz));
+            this.Close();
         }
     }
 }

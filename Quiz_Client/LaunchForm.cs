@@ -102,6 +102,7 @@ namespace Quiz_Client
         {
             this.Hide();
             new Home().ShowDialog();
+            Host_.Active_User = null;
             this.Show();
         }
 

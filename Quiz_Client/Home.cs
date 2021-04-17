@@ -55,8 +55,10 @@ namespace Quiz_Client
         }
         private void UpdateQuizList(Quiz[] quizzes)
         {
-            lstQuiz.DisplayMember = "Id";
+            lstQuiz.DisplayMember = "Q_Name";
             lstQuiz.DataSource = quizzes;
+            lstQuiz.Update();
+            Update();
         }
 
         private void Host__Result_Ping(Ping_Result result)
@@ -196,7 +198,6 @@ namespace Quiz_Client
 
             //Reloads with a new Question
             Quiz_Question.LoadQuestion(questions[Q_Index]);
-            Quiz_Question.Update();
 
             //Updates the progress bar
             prgTimeLeft.Maximum = questions[Q_Index].Question_Time;
@@ -281,6 +282,7 @@ namespace Quiz_Client
         {
             //Opens a new Quiz Creation window
             new Creation.Create_Quiz().ShowDialog();
+            LaunchForm.Host_.Send_To_Server(new Request<Quiz[]>());
         }
 
         private void BtnStart_Click(object sender, EventArgs e)

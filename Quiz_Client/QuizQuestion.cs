@@ -24,6 +24,7 @@ namespace Quiz_Client
 
         public void LoadQuestion(Question question)
         {
+            ButtonClick(true);
             q = question;
             string[] QRand = q.Vis_Answers.OrderBy(x => rand.Next()).ToArray();
 
@@ -39,21 +40,27 @@ namespace Quiz_Client
                 BtnQ3.Text = QRand[2];
                 BtnQ3.Enabled = true;
             }
+            else
+                BtnQ3.Text = "";
             if (QRand.Length == 4)
             {
                 BtnQ4.Text = QRand[3];
                 BtnQ4.Enabled = true;
             }
+            else
+                BtnQ4.Text = "";
+            Enabled = true;
         }
 
         //
-        private void ButtonClick()
+        private void ButtonClick(bool set = false)
         {
-            BtnQ1.Enabled = false;
-            BtnQ2.Enabled = false;
-            BtnQ3.Enabled = false;
-            BtnQ4.Enabled = false;
-            lblQuestion.Text = "Please wait for others to finish~~";
+            BtnQ1.Enabled = set;
+            BtnQ2.Enabled = set;
+            BtnQ3.Enabled = set;
+            BtnQ4.Enabled = set;
+            if(!set)
+                lblQuestion.Text = "Please wait for others to finish~~";
         }
 
         private void BtnQ1_Click(object sender, EventArgs e)

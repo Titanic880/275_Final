@@ -24,6 +24,8 @@ namespace Standards_Final.Quizlet
         /// </summary>
         public string Questions_Str { get; set; }
 
+        public string Q_Name { get; set; }
+
         /// <summary>
         /// True = public, false = private
         /// </summary>
