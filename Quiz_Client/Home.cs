@@ -97,6 +97,7 @@ namespace Quiz_Client
                 //Starts the quiz
                 MessageBox.Show("Quiz will begin when this is closed");
                 Quiz_Question.Enabled = true;
+                inprogress = true;
                 TimeLeft.Start();
             }
         }
@@ -168,7 +169,7 @@ namespace Quiz_Client
         private void Reset_Next()
         {
             //Checks if theres a test going on
-            if (inprogress && Q_Index == 0)
+            if (inprogress)
             {
                 if (Quiz_Question.Correct)
                 {

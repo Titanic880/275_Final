@@ -24,6 +24,7 @@ namespace Quiz_Client
 
         public void LoadQuestion(Question question)
         {
+            Correct = false;
             ButtonClick(true);
             q = question;
             string[] QRand = q.Vis_Answers.OrderBy(x => rand.Next()).ToArray();
@@ -41,14 +42,20 @@ namespace Quiz_Client
                 BtnQ3.Enabled = true;
             }
             else
+            {
                 BtnQ3.Text = "";
+                BtnQ3.Enabled = false;
+            }
             if (QRand.Length == 4)
             {
                 BtnQ4.Text = QRand[3];
                 BtnQ4.Enabled = true;
             }
             else
+            {
                 BtnQ4.Text = "";
+                BtnQ4.Enabled = false;
+            }
             Enabled = true;
         }
 

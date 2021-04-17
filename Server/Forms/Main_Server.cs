@@ -176,7 +176,7 @@ namespace Server.Forms
         {
             //Sends the update for the client to deal with (INCLUDES HOST)
             foreach(Client_Object a in Clients)
-                if(a.User_Obj.Current_Session == _Update.user.Current_Session)
+                if(a.User_Obj.Current_Session.Session_ID == _Update.user.Current_Session.Session_ID)
                 {
                     a.SendMessage(_Update);
                 }
